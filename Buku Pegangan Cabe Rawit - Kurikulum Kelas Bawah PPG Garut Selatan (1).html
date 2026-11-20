@@ -1,0 +1,2730 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buku Pegangan Cabe Rawit — PPG Garut Selatan</title>
+  <meta name="description" content="Kurikulum Pembelajaran Kelas Bawah (Tingkat PAUD & SD Kelas 1, 2, 3) PPG Daerah Garut Selatan — Edisi Tersinkronisasi Lengkap" />
+  <meta name="theme-color" content="#047857" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Cabe Rawit PPG" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            arabic: ['"Amiri"', '"Scheherazade New"', '"Noto Naskh Arabic"', 'serif'],
+          },
+          colors: {
+            emerald: {
+              950: '#022c22',
+            },
+            amber: {
+              450: '#eab308',
+            }
+          },
+          boxShadow: {
+            soft: '0 4px 20px -2px rgba(4, 120, 87, 0.08)',
+            gold: '0 4px 16px -2px rgba(217, 119, 6, 0.16)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Google Fonts: Inter & Amiri (for clear Arabic harakat/tashkil) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Custom scrollbar & Arabic typography helpers */
+    .arabic-text {
+      font-family: 'Amiri', 'Scheherazade New', 'Noto Naskh Arabic', serif;
+      direction: rtl;
+      unicode-bidi: isolate;
+      line-height: 2.15;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #fff !important; color: #000 !important; }
+    }
+  </style>
+</head>
+<body class="bg-emerald-50/40 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200 selection:bg-emerald-600 selection:text-white">
+
+  <!-- Toast / Message Box (replaces alert/confirm) -->
+  <div id="toastContainer" class="fixed bottom-20 lg:bottom-6 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-2 sm:px-0"></div>
+
+  <!-- Top Header -->
+  <header class="sticky top-0 z-40 bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 dark:from-slate-900 dark:via-emerald-950 dark:to-slate-900 text-white shadow-lg border-b border-amber-400/30 no-print">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3">
+      <div class="flex items-center justify-between gap-2">
+        <!-- Brand / Logo -->
+        <div class="flex items-center gap-3 min-w-0 cursor-pointer" onclick="switchTab('beranda')">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 p-0.5 shadow-gold shrink-0 flex items-center justify-center">
+            <div class="w-full h-full rounded-[14px] bg-emerald-950 flex flex-col items-center justify-center leading-none">
+              <span class="text-[10px] font-extrabold tracking-tighter text-amber-300">PPG</span>
+              <span class="text-[9px] font-bold text-emerald-200 mt-0.5">GSL</span>
+            </div>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="inline-block w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+              <p class="text-[11px] font-semibold uppercase tracking-wider text-amber-300 truncate">
+                PPG Daerah Garut Selatan
+              </p>
+            </div>
+            <h1 class="text-sm sm:text-lg font-extrabold tracking-tight text-white truncate">
+              Buku Pegangan Cabe Rawit
+            </h1>
+            <p class="text-[11px] text-emerald-100/90 truncate hidden sm:block">
+              Kurikulum Kelas Bawah (PAUD &amp; SD Kelas 1, 2, 3) • Edisi Tersinkronisasi
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Controls -->
+        <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <button
+            id="installAppBtn"
+            type="button"
+            onclick="handleInstallClick()"
+            class="flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 active:scale-95 text-emerald-950 font-bold text-xs sm:text-sm px-3 py-2 rounded-xl shadow-gold transition cursor-pointer"
+            title="Install Aplikasi ke HP"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3" />
+            </svg>
+            <span>Install HP</span>
+          </button>
+
+          <button
+            type="button"
+            onclick="openInstallGuideModal()"
+            class="p-2 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-amber-200 transition cursor-pointer"
+            title="Panduan Install HP &amp; APK"
+            aria-label="Panduan Install HP dan APK"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </button>
+
+          <button
+            id="themeToggleBtn"
+            type="button"
+            onclick="toggleDarkMode()"
+            class="p-2 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-amber-200 transition cursor-pointer"
+            title="Ganti Mode Gelap / Terang"
+            aria-label="Ganti Mode Gelap atau Terang"
+          >
+            <!-- Sun / Moon icon toggled by JS -->
+            <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search & Filter Bar -->
+      <div class="mt-3 flex flex-col sm:flex-row gap-2">
+        <div class="relative flex-1">
+          <input
+            id="globalSearchInput"
+            type="search"
+            oninput="handleSearchChange(this.value)"
+            placeholder="Cari materi, Asmaul Husna, do'a, surat pendek, dalil, adab, kemandirian..."
+            class="w-full pl-9 pr-9 py-2 rounded-xl bg-white/95 dark:bg-slate-800/95 text-slate-900 dark:text-slate-100 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-inner"
+          />
+          <svg class="w-4 h-4 text-emerald-700 dark:text-amber-300 absolute left-3 top-2.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+          </svg>
+          <button
+            id="clearSearchBtn"
+            type="button"
+            onclick="clearSearch()"
+            class="hidden absolute right-2.5 top-2 text-slate-400 hover:text-slate-700 dark:hover:text-white text-xs font-bold px-1.5 py-0.5 rounded cursor-pointer"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- Jenjang / Kelompok Filter -->
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5 sm:pb-0">
+          <span class="text-[11px] font-semibold text-amber-200/90 shrink-0 hidden md:inline">Jenjang:</span>
+          <button data-jenjang="ALL" onclick="setJenjangFilter('ALL')" class="jenjang-pill px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer shrink-0 bg-amber-400 text-emerald-950">
+            Semua
+          </button>
+          <button data-jenjang="PAUD" onclick="setJenjangFilter('PAUD')" class="jenjang-pill px-3 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer shrink-0 bg-white/10 hover:bg-white/20 text-white">
+            PAUD
+          </button>
+          <button data-jenjang="KLS1" onclick="setJenjangFilter('KLS1')" class="jenjang-pill px-3 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer shrink-0 bg-white/10 hover:bg-white/20 text-white">
+            Kls 1
+          </button>
+          <button data-jenjang="KLS2" onclick="setJenjangFilter('KLS2')" class="jenjang-pill px-3 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer shrink-0 bg-white/10 hover:bg-white/20 text-white">
+            Kls 2
+          </button>
+          <button data-jenjang="KLS3" onclick="setJenjangFilter('KLS3')" class="jenjang-pill px-3 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer shrink-0 bg-white/10 hover:bg-white/20 text-white">
+            Kls 3
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop Navigation Tabs -->
+    <nav class="hidden lg:block bg-emerald-950/60 dark:bg-slate-950/80 border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-6 flex items-center gap-1 overflow-x-auto no-scrollbar">
+        <button data-tab="beranda" onclick="switchTab('beranda')" class="nav-tab px-4 py-2.5 text-sm font-semibold border-b-2 transition cursor-pointer whitespace-nowrap">
+          1. Beranda &amp; Jadwal KBM
+        </button>
+        <button data-tab="matriks" onclick="switchTab('matriks')" class="nav-tab px-4 py-2.5 text-sm font-semibold border-b-2 transition cursor-pointer whitespace-nowrap">
+          2. Matriks 8 Semester
+        </button>
+        <button data-tab="silabus" onclick="switchTab('silabus')" class="nav-tab px-4 py-2.5 text-sm font-semibold border-b-2 transition cursor-pointer whitespace-nowrap">
+          3. Silabus Hafalan &amp; Dalil
+        </button>
+        <button data-tab="keilmuan" onclick="switchTab('keilmuan')" class="nav-tab px-4 py-2.5 text-sm font-semibold border-b-2 transition cursor-pointer whitespace-nowrap">
+          4. Keilmuan, Ibadah &amp; Adab
+        </button>
+        <button data-tab="kemandirian" onclick="switchTab('kemandirian')" class="nav-tab px-4 py-2.5 text-sm font-semibold border-b-2 transition cursor-pointer whitespace-nowrap">
+          5. Kemandirian &amp; Catatan
+        </button>
+        <button data-tab="progres" onclick="switchTab('progres')" class="nav-tab px-4 py-2.5 text-sm font-semibold border-b-2 transition cursor-pointer whitespace-nowrap">
+          6. Progres &amp; Bookmark <span id="progresBadge" class="ml-1 px-1.5 py-0.5 text-[10px] rounded-full bg-amber-400 text-emerald-950 font-extrabold">0</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-5 pb-24 lg:pb-10">
+
+    <!-- Search Results Banner (shown when searching) -->
+    <div id="searchResultsPanel" class="hidden mb-6 bg-white dark:bg-slate-900 rounded-2xl border border-amber-400/50 shadow-soft p-4 sm:p-5">
+      <div class="flex items-center justify-between gap-2 mb-3">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Hasil Pencarian Instan</span>
+          <h2 id="searchSummaryText" class="text-base sm:text-lg font-bold text-slate-900 dark:text-white"></h2>
+        </div>
+        <button onclick="clearSearch()" class="text-xs font-semibold px-3 py-1.5 rounded-xl bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-200 hover:bg-emerald-200 cursor-pointer">
+          Tutup Pencarian
+        </button>
+      </div>
+      <div id="searchResultsList" class="space-y-3 max-h-[65vh] overflow-y-auto pr-1"></div>
+    </div>
+
+    <!-- TAB 1: BERANDA & JADWAL KBM TERPADU -->
+    <section id="tab-beranda" class="tab-section space-y-6">
+      <!-- Hero Card -->
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 dark:from-slate-900 dark:via-emerald-950 dark:to-slate-900 text-white p-5 sm:p-8 shadow-xl border border-amber-400/30">
+        <div class="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-amber-400/10 blur-2xl pointer-events-none"></div>
+        <div class="absolute -left-10 -bottom-16 w-56 h-56 rounded-full bg-emerald-400/10 blur-2xl pointer-events-none"></div>
+
+        <div class="relative z-10 grid lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-8 space-y-3">
+            <div class="inline-flex flex-wrap items-center gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-400 text-emerald-950 shadow-sm">
+                EDISI TERSINKRONISASI LENGKAP
+              </span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-amber-200 border border-white/15">
+                PAUD &amp; SD Kelas 1, 2, 3
+              </span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-emerald-200 border border-white/15">
+                Program Khatam Tilawati Jilid 1–6
+              </span>
+            </div>
+
+            <h2 class="text-xl sm:text-3xl font-extrabold leading-tight">
+              Buku Pegangan Cabe Rawit — Kurikulum Pembelajaran Kelas Bawah
+            </h2>
+            <p class="text-sm sm:text-base text-emerald-100/90 leading-relaxed">
+              <strong>Penggerak Pembina Generus (PPG) Daerah Garut Selatan</strong> • <em>"Be The Teacher Of The World"</em>. Panduan terpadu pembelajaran individual &amp; klasikal gabungan (75 menit) mencakup Tilawati Jilid 1–6, Kitabati/Kitabaty Jilid 1–4 &amp; Menyalin Surat Pendek, 80 Asmaul Husna, 30 Do'a Harian, 19 Surat Pendek, 6 Dalil Utama, Keilmuan/Kefahaman Agama, Akhlaqul Karimah, Adab 18 Aspek, Praktek Ibadah, ORSEN, dan Kemandirian.
+            </p>
+
+            <div class="pt-2 flex flex-wrap gap-2.5">
+              <button onclick="switchTab('silabus')" class="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-emerald-950 font-bold text-sm shadow-gold transition cursor-pointer">
+                Buka Silabus Hafalan &amp; Dalil
+              </button>
+              <button onclick="switchTab('matriks')" class="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-semibold text-sm border border-white/20 transition cursor-pointer">
+                Lihat Matriks 8 Semester
+              </button>
+              <button onclick="openInstallGuideModal()" class="px-4 py-2.5 rounded-xl bg-emerald-950/70 hover:bg-emerald-950 text-amber-200 font-semibold text-sm border border-amber-400/30 transition cursor-pointer">
+                Cara Install ke HP / APK
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Summary KPIs -->
+          <div class="lg:col-span-4 grid grid-cols-2 gap-3">
+            <div class="rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 p-3.5">
+              <div class="text-2xl font-extrabold text-amber-300">75 Menit</div>
+              <div class="text-xs text-emerald-100 mt-0.5">Durasi KBM Terpadu (5 Sesi)</div>
+            </div>
+            <div class="rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 p-3.5">
+              <div class="text-2xl font-extrabold text-amber-300">80 Asma</div>
+              <div class="text-xs text-emerald-100 mt-0.5">Urutan 1–80 (4 Tahap Jenjang)</div>
+            </div>
+            <div class="rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 p-3.5">
+              <div class="text-2xl font-extrabold text-amber-300">30 Do'a</div>
+              <div class="text-xs text-emerald-100 mt-0.5">Do'a Harian Terpadu (Kel. A–D)</div>
+            </div>
+            <div class="rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 p-3.5">
+              <div class="text-2xl font-extrabold text-amber-300">19 Surat</div>
+              <div class="text-xs text-emerald-100 mt-0.5">13 Target Utama + 6 Pengayaan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cakupan Materi Terpadu Card -->
+      <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6">
+        <div class="flex items-center gap-2.5 mb-3">
+          <span class="w-8 h-8 rounded-xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-amber-300 flex items-center justify-center font-extrabold text-sm">A</span>
+          <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">
+            Cakupan Materi Terpadu Kelas Bawah (Tersinkronisasi Target Pembinaan Generus PAUD–SD Kelas 3)
+          </h3>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="p-4 rounded-2xl bg-emerald-50/70 dark:bg-slate-800/70 border border-emerald-200/60 dark:border-slate-700">
+            <h4 class="font-bold text-emerald-900 dark:text-amber-300 mb-1.5">Bacaan &amp; Menulis Al-Qur'an</h4>
+            <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+              Matriks Target <strong>8 Semester</strong> Bacaan Tilawati (<strong>Khatam Jilid 1–6</strong>) &amp; Menulis <strong>Kitabati/Kitabaty (Jilid 1–4)</strong> dilanjutkan <strong>Menyalin Surat-surat Pendek</strong>.
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-amber-50/70 dark:bg-slate-800/70 border border-amber-200/70 dark:border-slate-700">
+            <h4 class="font-bold text-amber-900 dark:text-amber-300 mb-1.5">Hafalan Inti &amp; Dalil</h4>
+            <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+              Hafalan <strong>80 Asmaul Husna</strong> (Urutan 1–80), <strong>30 Do'a Harian Terpadu</strong>, <strong>19 Surat Pendek</strong> (13 Target Utama + 6 Pengayaan), dan <strong>6 Dalil Utama</strong> (3 Tema).
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-teal-50/70 dark:bg-slate-800/70 border border-teal-200/70 dark:border-slate-700">
+            <h4 class="font-bold text-teal-900 dark:text-emerald-300 mb-1.5">Keilmuan, Akhlaq, Adab &amp; Kemandirian</h4>
+            <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+              Keilmuan &amp; Kefahaman Agama (<strong>Alim-Faqih</strong>), <strong>Akhlaqul Karimah</strong>, <strong>Adab &amp; Tatakrama Keseharian (18 Aspek)</strong>, <strong>Kemandirian</strong>, <strong>Bacaan &amp; Praktek Ibadah</strong>, serta <strong>ORSEN</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1. Jadwal KBM Mingguan Kelas Bawah -->
+      <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-amber-400">Jadwal &amp; Pembagian Waktu KBM Terpadu (75 Menit)</span>
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">1. Jadwal KBM Mingguan Kelas Bawah</h3>
+          </div>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-200">
+            Senin • Selasa • Kamis • Jum'at
+          </span>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Senin -->
+          <div class="rounded-2xl border-2 border-emerald-600/25 dark:border-emerald-700/50 bg-gradient-to-b from-emerald-50/80 to-white dark:from-slate-800/80 dark:to-slate-900 p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2.5 py-1 rounded-lg bg-emerald-700 text-white text-xs font-extrabold">SENIN</span>
+                <span class="text-xs font-bold text-emerald-700 dark:text-amber-300">75 Menit</span>
+              </div>
+              <h4 class="font-bold text-slate-900 dark:text-white text-sm mb-1.5">Tilawati, Asmaul Husna &amp; Do'a Harian</h4>
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Bacaan Tilawati, Hafalan Asmaul Husna (1–80), dan Hafalan Do'a-do'a Harian (30 Do'a).
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-200/70 dark:border-slate-700 text-[11px] text-slate-500 dark:text-slate-400">
+              Fokus: Baca Simak + Hafalan Asma &amp; Do'a
+            </div>
+          </div>
+
+          <!-- Selasa -->
+          <div class="rounded-2xl border-2 border-amber-500/30 dark:border-amber-600/40 bg-gradient-to-b from-amber-50/70 to-white dark:from-slate-800/80 dark:to-slate-900 p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2.5 py-1 rounded-lg bg-amber-500 text-emerald-950 text-xs font-extrabold">SELASA</span>
+                <span class="text-xs font-bold text-amber-700 dark:text-amber-300">75 Menit</span>
+              </div>
+              <h4 class="font-bold text-slate-900 dark:text-white text-sm mb-1.5">Tilawati &amp; Menulis Huruf Arab</h4>
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Bacaan Tilawati dan Menulis Huruf Arab (Kitabati / Kitabaty Jilid 1–4 dilanjutkan Menyalin Surat-surat Pendek).
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-200/70 dark:border-slate-700 text-[11px] text-slate-500 dark:text-slate-400">
+              Fokus: Baca Simak + Kaligrafi/Kitabaty
+            </div>
+          </div>
+
+          <!-- Kamis -->
+          <div class="rounded-2xl border-2 border-teal-600/25 dark:border-teal-700/50 bg-gradient-to-b from-teal-50/75 to-white dark:from-slate-800/80 dark:to-slate-900 p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2.5 py-1 rounded-lg bg-teal-700 text-white text-xs font-extrabold">KAMIS</span>
+                <span class="text-xs font-bold text-teal-700 dark:text-teal-300">75 Menit</span>
+              </div>
+              <h4 class="font-bold text-slate-900 dark:text-white text-sm mb-1.5">Tilawati, Surat Pendek &amp; Dalil</h4>
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Bacaan Tilawati, Hafalan Surat-surat Pendek (19 Surat), dan Hafalan Dalil (3 Tema Utama).
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-200/70 dark:border-slate-700 text-[11px] text-slate-500 dark:text-slate-400">
+              Fokus: Baca Simak + Tahfidz Juz 'Amma &amp; Dalil
+            </div>
+          </div>
+
+          <!-- Jum'at -->
+          <div class="rounded-2xl border-2 border-emerald-700/30 dark:border-emerald-600/50 bg-gradient-to-b from-emerald-50/80 to-white dark:from-slate-800/80 dark:to-slate-900 p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2.5 py-1 rounded-lg bg-emerald-900 text-amber-300 text-xs font-extrabold">JUM'AT</span>
+                <span class="text-xs font-bold text-emerald-800 dark:text-amber-300">75 Menit</span>
+              </div>
+              <h4 class="font-bold text-slate-900 dark:text-white text-sm mb-1.5">Keilmuan, Akhlaq, Adab, Ibadah &amp; ORSEN</h4>
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Keilmuan &amp; Kefahaman Agama, Akhlaqul Karimah, Adab/Tatakrama &amp; Kemandirian, Praktek Ibadah, dan ORSEN (Olahraga dan Seni).
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-200/70 dark:border-slate-700 text-[11px] text-slate-500 dark:text-slate-400">
+              Fokus: Pembinaan Karakter, Praktek &amp; ORSEN
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Standar Alokasi Waktu Per Pertemuan (5 Sesi) -->
+      <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Struktur Sesi Pertemuan (Total 75 Menit)</span>
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">2. Standar Alokasi Waktu Per Pertemuan</h3>
+          </div>
+          <div class="text-xs font-bold px-3 py-1.5 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-200">
+            5 + 15 + 30 + 20 + 5 = 75 Menit
+          </div>
+        </div>
+
+        <!-- Visual Time Bar -->
+        <div class="w-full h-4 rounded-full overflow-hidden flex mb-5 bg-slate-200 dark:bg-slate-800 shadow-inner">
+          <div style="width: 6.66%" class="bg-emerald-500 h-full" title="5 menit: Do'a pembukaan"></div>
+          <div style="width: 20%" class="bg-amber-400 h-full" title="15 menit: Peraga Tilawati"></div>
+          <div style="width: 40%" class="bg-emerald-700 h-full" title="30 menit: Buku Tilawati"></div>
+          <div style="width: 26.66%" class="bg-teal-600 h-full" title="20 menit: Materi Penunjang"></div>
+          <div style="width: 6.66%" class="bg-amber-600 h-full" title="5 menit: Do'a penutup"></div>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-emerald-900 dark:bg-slate-800 text-white">
+                <th class="py-3 px-3 sm:px-4 font-bold w-12">No</th>
+                <th class="py-3 px-3 sm:px-4 font-bold w-28">Waktu</th>
+                <th class="py-3 px-3 sm:px-4 font-bold">Materi</th>
+                <th class="py-3 px-3 sm:px-4 font-bold">Teknik</th>
+                <th class="py-3 px-3 sm:px-4 font-bold">Keterangan Pelaksanaan</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+              <tr class="hover:bg-emerald-50/60 dark:hover:bg-slate-800/50 transition">
+                <td class="py-3 px-3 sm:px-4 font-bold text-emerald-800 dark:text-amber-300">1</td>
+                <td class="py-3 px-3 sm:px-4 font-extrabold text-slate-900 dark:text-white whitespace-nowrap">5 menit</td>
+                <td class="py-3 px-3 sm:px-4 font-bold text-slate-900 dark:text-white">Do'a pembukaan</td>
+                <td class="py-3 px-3 sm:px-4"><span class="px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-200 text-xs font-semibold">Klasikal</span></td>
+                <td class="py-3 px-3 sm:px-4 text-slate-700 dark:text-slate-300">Presensi, do'a pembukaan, dan motivasi bersama</td>
+              </tr>
+              <tr class="hover:bg-emerald-50/60 dark:hover:bg-slate-800/50 transition">
+                <td class="py-3 px-3 sm:px-4 font-bold text-emerald-800 dark:text-amber-300">2</td>
+                <td class="py-3 px-3 sm:px-4 font-extrabold text-slate-900 dark:text-white whitespace-nowrap">15 menit</td>
+                <td class="py-3 px-3 sm:px-4 font-bold text-slate-900 dark:text-white">Peraga Tilawati</td>
+                <td class="py-3 px-3 sm:px-4"><span class="px-2 py-0.5 rounded-md bg-amber-100 dark:bg-amber-900/50 text-amber-900 dark:text-amber-200 text-xs font-semibold">Klasikal (per kelompok jilid)</span></td>
+                <td class="py-3 px-3 sm:px-4 text-slate-700 dark:text-slate-300">Per pertemuan 4 halaman (kelompok PAUD s/d Jilid 6)</td>
+              </tr>
+              <tr class="hover:bg-emerald-50/60 dark:hover:bg-slate-800/50 transition">
+                <td class="py-3 px-3 sm:px-4 font-bold text-emerald-800 dark:text-amber-300">3</td>
+                <td class="py-3 px-3 sm:px-4 font-extrabold text-slate-900 dark:text-white whitespace-nowrap">30 menit</td>
+                <td class="py-3 px-3 sm:px-4 font-bold text-slate-900 dark:text-white">Buku Tilawati</td>
+                <td class="py-3 px-3 sm:px-4"><span class="px-2 py-0.5 rounded-md bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-200 text-xs font-semibold">Baca Simak Individual</span></td>
+                <td class="py-3 px-3 sm:px-4 text-slate-700 dark:text-slate-300">Per pertemuan 1 halaman sesuai jilid masing-masing murid</td>
+              </tr>
+              <tr class="hover:bg-emerald-50/60 dark:hover:bg-slate-800/50 transition">
+                <td class="py-3 px-3 sm:px-4 font-bold text-emerald-800 dark:text-amber-300">4</td>
+                <td class="py-3 px-3 sm:px-4 font-extrabold text-slate-900 dark:text-white whitespace-nowrap">20 menit</td>
+                <td class="py-3 px-3 sm:px-4 font-bold text-slate-900 dark:text-white">Materi Penunjang</td>
+                <td class="py-3 px-3 sm:px-4"><span class="px-2 py-0.5 rounded-md bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-200 text-xs font-semibold">Klasikal Gabungan</span></td>
+                <td class="py-3 px-3 sm:px-4 text-slate-700 dark:text-slate-300">Sesuai jadwal harian (hafalan / keilmuan / akhlak / adab / ibadah)</td>
+              </tr>
+              <tr class="hover:bg-emerald-50/60 dark:hover:bg-slate-800/50 transition">
+                <td class="py-3 px-3 sm:px-4 font-bold text-emerald-800 dark:text-amber-300">5</td>
+                <td class="py-3 px-3 sm:px-4 font-extrabold text-slate-900 dark:text-white whitespace-nowrap">5 menit</td>
+                <td class="py-3 px-3 sm:px-4 font-bold text-slate-900 dark:text-white">Do'a penutup</td>
+                <td class="py-3 px-3 sm:px-4"><span class="px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-200 text-xs font-semibold">Klasikal</span></td>
+                <td class="py-3 px-3 sm:px-4 text-slate-700 dark:text-slate-300">Memberikan penekanan materi, PR, dan do'a penutup</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: MATRIKS TARGET 8 SEMESTER -->
+    <section id="tab-matriks" class="tab-section hidden space-y-6">
+      <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6">
+        <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-amber-400">B. Matriks Target Capaian Pembelajaran Kelas Bawah</span>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">
+          Matriks Target 8 Semester (PAUD s/d SD Kelas 3 • 1 Semester = 5,5 Bulan)
+        </h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+          <strong>Mekanisme Pembelajaran Kelas Gabungan (PAUD – SD Kelas 3):</strong><br/>
+          1. <strong>Materi Berjenjang Individual (Tilawati &amp; Menulis):</strong> Disesuaikan dengan jilid dan tingkat kemampuan masing-masing peserta didik dengan target tuntas (khatam) Tilawati Jilid 1–6 serta Kitabaty Jilid 1–4 dilanjutkan menyalin surat-surat pendek di akhir SD Kelas 3 (total 8 semester / 4 tahun).<br/>
+          2. <strong>Materi Klasikal Gabungan (Hafalan, Keilmuan, Kefahaman, Akhlak, Adab, Kemandirian &amp; Ibadah):</strong> Disampaikan bersama-sama dan diulang bertahap sesuai jenjang kelompok tingkat.
+        </p>
+      </div>
+
+      <!-- Matrix Cards / Table Container -->
+      <div id="matriksContainer" class="space-y-4"></div>
+    </section>
+
+    <!-- TAB 3: SILABUS RINCI HAFALAN & DALIL -->
+    <section id="tab-silabus" class="tab-section hidden space-y-6">
+      <!-- Sub-navigation pills inside Silabus -->
+      <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-3 flex flex-wrap gap-2">
+        <button data-subtab="asmaul" onclick="switchSilabusSubtab('asmaul')" class="silabus-subtab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer bg-emerald-700 text-white">
+          1. Asmaul Husna (1–80)
+        </button>
+        <button data-subtab="doa" onclick="switchSilabusSubtab('doa')" class="silabus-subtab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer bg-emerald-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+          2. 30 Do'a Harian Terpadu
+        </button>
+        <button data-subtab="surat" onclick="switchSilabusSubtab('surat')" class="silabus-subtab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer bg-emerald-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+          3. 19 Surat Pendek (Kel. 1–4)
+        </button>
+        <button data-subtab="dalil" onclick="switchSilabusSubtab('dalil')" class="silabus-subtab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer bg-emerald-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+          4. 6 Dalil Utama (3 Tema)
+        </button>
+      </div>
+
+      <!-- Subtab 1: 80 Asmaul Husna -->
+      <div id="subtab-asmaul" class="silabus-panel space-y-5">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-amber-400">Silabus Rinci Materi Klasikal • Poin 1</span>
+              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Hafalan Asmaul Husna (Urutan 1–80)</h3>
+            </div>
+            <span class="text-xs font-bold px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-200">
+              Target: 1 Bulan = 3–4 • 1 Minggu = 1
+            </span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mb-4">
+            Terbagi 4 Tahap: <strong>Tahap 1 (PAUD: 1–20)</strong> • <strong>Tahap 2 (Kls 1: 21–40)</strong> • <strong>Tahap 3 (Kls 2: 41–60)</strong> • <strong>Tahap 4 (Kls 3: 61–80)</strong>. Klik ikon bintang untuk menandai progres hafalan/pengajaran.
+          </p>
+
+          <!-- Tahap Filter inside Asmaul -->
+          <div class="flex flex-wrap gap-2 mb-4">
+            <button onclick="filterAsmaulTahap('ALL')" data-atahap="ALL" class="atahap-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-700 text-white cursor-pointer">Semua (1–80)</button>
+            <button onclick="filterAsmaulTahap('1')" data-atahap="1" class="atahap-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-100 dark:bg-slate-800 text-emerald-900 dark:text-emerald-200 cursor-pointer">Tahap 1: PAUD (1–20)</button>
+            <button onclick="filterAsmaulTahap('2')" data-atahap="2" class="atahap-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-100 dark:bg-slate-800 text-emerald-900 dark:text-emerald-200 cursor-pointer">Tahap 2: Kls 1 (21–40)</button>
+            <button onclick="filterAsmaulTahap('3')" data-atahap="3" class="atahap-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-100 dark:bg-slate-800 text-emerald-900 dark:text-emerald-200 cursor-pointer">Tahap 3: Kls 2 (41–60)</button>
+            <button onclick="filterAsmaulTahap('4')" data-atahap="4" class="atahap-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-100 dark:bg-slate-800 text-emerald-900 dark:text-emerald-200 cursor-pointer">Tahap 4: Kls 3 (61–80)</button>
+          </div>
+
+          <div id="asmaulGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"></div>
+        </div>
+      </div>
+
+      <!-- Subtab 2: 30 Do'a Harian -->
+      <div id="subtab-doa" class="silabus-panel hidden space-y-5">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-amber-400">Silabus Rinci Materi Klasikal • Poin 2</span>
+              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Kumpulan Hafalan Do'a Harian Terpadu (30 Do'a)</h3>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="filterDoaKel('ALL')" data-dkel="ALL" class="dkel-btn px-3 py-1 rounded-xl text-xs font-bold bg-emerald-700 text-white cursor-pointer">Semua (30)</button>
+              <button onclick="filterDoaKel('A')" data-dkel="A" class="dkel-btn px-3 py-1 rounded-xl text-xs font-semibold bg-emerald-100 dark:bg-slate-800 text-emerald-900 dark:text-emerald-200 cursor-pointer">Kel. A (PAUD)</button>
+              <button onclick="filterDoaKel('B')" data-dkel="B" class="dkel-btn px-3 py-1 rounded-xl text-xs font-semibold bg-emerald-100 dark:bg-slate-800 text-emerald-900 dark:text-emerald-200 cursor-pointer">Kel. B (Kls 1)</button>
+              <button onclick="filterDoaKel('C')" data-dkel="C" class="dkel-btn px-3 py-1 rounded-xl text-xs font-semibold bg-emerald-100 dark:bg-slate-800 text-emerald-900 dark:text-emerald-200 cursor-pointer">Kel. C (Kls 2)</button>
+              <button onclick="filterDoaKel('D')" data-dkel="D" class="dkel-btn px-3 py-1 rounded-xl text-xs font-semibold bg-emerald-100 dark:bg-slate-800 text-emerald-900 dark:text-emerald-200 cursor-pointer">Kel. D (Kls 3)</button>
+            </div>
+          </div>
+          <div id="doaList" class="space-y-4"></div>
+        </div>
+      </div>
+
+      <!-- Subtab 3: 19 Surat Pendek -->
+      <div id="subtab-surat" class="silabus-panel hidden space-y-5">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-amber-400">Silabus Rinci Materi Klasikal • Poin 3</span>
+          <h3 class="text-xl font-extrabold text-slate-900 dark:text-white mt-0.5">
+            Hafalan Surat Pendek (19 Surat: 13 Target Utama + 6 Pengayaan)
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 mb-5">
+            Terbagi dalam Kelompok 1 (PAUD), Kelompok 2 (Kelas 1 / Jilid 1–2), Kelompok 3 (Kelas 2 / Jilid 3–4 + Pengayaan), dan Kelompok 4 (Kelas 3 / Jilid 5–6 + Pengayaan).
+          </p>
+          <div id="suratKelGrid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+        </div>
+      </div>
+
+      <!-- Subtab 4: 6 Dalil Utama -->
+      <div id="subtab-dalil" class="silabus-panel hidden space-y-5">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-amber-400">Silabus Rinci Materi Klasikal • Poin 4</span>
+          <h3 class="text-xl font-extrabold text-slate-900 dark:text-white mt-0.5">
+            Hafalan Dalil (3 Tema Utama: 6 Dalil Al-Qur'an &amp; Hadits)
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 mb-5">
+            Mencakup <strong>Tema 1: Dalil Mengaji</strong> (2 dalil), <strong>Tema 2: Dalil Mengamal</strong> (2 dalil), dan <strong>Tema 3: Dalil Membela</strong> (2 dalil) lengkap dengan teks Arab asli, transliterasi, dan arti.
+          </p>
+          <div id="dalilContainer" class="space-y-5"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: KEILMUAN, IBADAH, AKHLAQ & ADAB (18 ASPEK) -->
+    <section id="tab-keilmuan" class="tab-section hidden space-y-6">
+      <!-- Sub-nav inside Keilmuan -->
+      <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-3 flex flex-wrap gap-2">
+        <button data-ktab="ibadah" onclick="switchKeilmuanSubtab('ibadah')" class="keilmuan-subtab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer bg-emerald-700 text-white">
+          5. Keilmuan, Kefahaman &amp; Praktek Ibadah
+        </button>
+        <button data-ktab="akhlaq" onclick="switchKeilmuanSubtab('akhlaq')" class="keilmuan-subtab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer bg-emerald-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+          6A. Akhlaqul Karimah (5 Ranah)
+        </button>
+        <button data-ktab="adab18" onclick="switchKeilmuanSubtab('adab18')" class="keilmuan-subtab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer bg-emerald-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+          6B. Adab / Tatakrama (18 Aspek Lengkap)
+        </button>
+      </div>
+
+      <div id="ktab-ibadah" class="keilmuan-panel space-y-5"></div>
+      <div id="ktab-akhlaq" class="keilmuan-panel hidden space-y-5"></div>
+      <div id="ktab-adab18" class="keilmuan-panel hidden space-y-5"></div>
+    </section>
+
+    <!-- TAB 5: KEMANDIRIAN & CATATAN PELAKSANAAN -->
+    <section id="tab-kemandirian" class="tab-section hidden space-y-6">
+      <div id="kemandirianContainer" class="space-y-5"></div>
+    </section>
+
+    <!-- TAB 6: PROGRES & BOOKMARK -->
+    <section id="tab-progres" class="tab-section hidden space-y-6">
+      <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-amber-400">Catatan Mengajar Guru &amp; Pembinaan Orang Tua</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">Progres Materi &amp; Item Tersimpan</h2>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button onclick="exportProgressJSON()" class="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold transition cursor-pointer">
+              Salin Rekap Progres
+            </button>
+            <button onclick="resetProgressWithConfirm()" class="px-3.5 py-2 rounded-xl bg-rose-100 hover:bg-rose-200 dark:bg-rose-950/60 dark:hover:bg-rose-900/60 text-rose-800 dark:text-rose-200 text-xs font-bold transition cursor-pointer">
+              Reset Progres
+            </button>
+          </div>
+        </div>
+
+        <div id="progresStats" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6"></div>
+        <div id="bookmarkedItemsList" class="space-y-2.5"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Mobile Bottom Navigation -->
+  <nav class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 shadow-lg no-print">
+    <div class="grid grid-cols-5 py-1.5 px-1">
+      <button data-tab="beranda" onclick="switchTab('beranda')" class="mob-tab flex flex-col items-center justify-center py-1 rounded-xl text-[10px] font-bold cursor-pointer">
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        <span>Jadwal</span>
+      </button>
+      <button data-tab="matriks" onclick="switchTab('matriks')" class="mob-tab flex flex-col items-center justify-center py-1 rounded-xl text-[10px] font-bold cursor-pointer">
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+        </svg>
+        <span>8 Sem</span>
+      </button>
+      <button data-tab="silabus" onclick="switchTab('silabus')" class="mob-tab flex flex-col items-center justify-center py-1 rounded-xl text-[10px] font-bold cursor-pointer">
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+        <span>Silabus</span>
+      </button>
+      <button data-tab="keilmuan" onclick="switchTab('keilmuan')" class="mob-tab flex flex-col items-center justify-center py-1 rounded-xl text-[10px] font-bold cursor-pointer">
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Adab</span>
+      </button>
+      <button data-tab="progres" onclick="switchTab('progres')" class="mob-tab flex flex-col items-center justify-center py-1 rounded-xl text-[10px] font-bold cursor-pointer relative">
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+        </svg>
+        <span>Progres</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="bg-emerald-950 text-emerald-100 border-t border-amber-400/25 py-6 px-4 text-center text-xs no-print">
+    <div class="max-w-5xl mx-auto space-y-1.5">
+      <p class="font-bold text-amber-300">
+        BUKU PEGANGAN CABE RAWIT — KURIKULUM PEMBELAJARAN KELAS BAWAH (PAUD &amp; SD KELAS 1, 2, 3)
+      </p>
+      <p class="text-emerald-200/80">
+        Penggerak Pembina Generus (PPG) Daerah Garut Selatan • Edisi Tersinkronisasi Lengkap • PWA Offline Ready
+      </p>
+    </div>
+  </footer>
+
+  <!-- Install Guide & APK Packaging Modal -->
+  <div id="installGuideModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full border border-amber-400/40 shadow-2xl overflow-hidden my-auto">
+      <div class="bg-gradient-to-r from-emerald-900 to-teal-900 text-white px-5 py-4 flex items-center justify-between">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-amber-300">Distribusi &amp; Instalasi HP</span>
+          <h3 class="text-lg font-extrabold">Cara Install ke HP Orang Lain &amp; Kemas ke APK</h3>
+        </div>
+        <button onclick="closeInstallGuideModal()" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center font-bold cursor-pointer">✕</button>
+      </div>
+
+      <div class="p-5 sm:p-6 space-y-4 text-xs sm:text-sm text-slate-700 dark:text-slate-300 max-h-[78vh] overflow-y-auto">
+        <div class="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 space-y-1.5">
+          <h4 class="font-extrabold text-emerald-900 dark:text-amber-300 text-sm">1. Instalasi Langsung di HP Android (Chrome / Edge / Samsung Internet)</h4>
+          <ol class="list-decimal list-inside space-y-1">
+            <li>Host/unggah file HTML ini ke hosting gratis (GitHub Pages, Netlify, Vercel, atau server sekolah/PPG) agar memiliki URL <code>https://...</code>.</li>
+            <li>Kirim link tersebut via WhatsApp ke guru/orang tua/murid.</li>
+            <li>Saat dibuka di HP Android, klik tombol <strong>"Install HP"</strong> di atas atau ketuk menu <strong>⋮ (Titik Tiga)</strong> &rarr; <strong>"Instal aplikasi" / "Tambahkan ke Layar Utama"</strong>.</li>
+            <li>Ikon <strong>Cabe Rawit PPG</strong> akan muncul di layar utama HP dan bisa dibuka secara <strong>offline</strong>.</li>
+          </ol>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 space-y-1.5">
+          <h4 class="font-extrabold text-amber-950 dark:text-amber-300 text-sm">2. Instalasi di iPhone / iPad (Safari iOS)</h4>
+          <ol class="list-decimal list-inside space-y-1">
+            <li>Buka link aplikasi di browser <strong>Safari</strong>.</li>
+            <li>Ketuk tombol <strong>Share (Kotak dengan panah ke atas)</strong> di bagian bawah layar.</li>
+            <li>Gulir ke bawah lalu pilih <strong>"Add to Home Screen" (Tambah ke Layar Utama)</strong> &rarr; ketuk <strong>Add</strong>.</li>
+          </ol>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+          <h4 class="font-extrabold text-slate-900 dark:text-white text-sm">3. Opsi Mengemas Menjadi File APK Android</h4>
+          <p>Jika ingin membagikan file <code>.apk</code> secara langsung:</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li><strong>PWA Builder (pwabuilder.com):</strong> Masukkan URL website PWA yang sudah di-deploy, lalu klik <em>Package For Stores &rarr; Android</em> untuk menghasilkan proyek/APK TWA (Trusted Web Activity).</li>
+            <li><strong>WebIntoApp / Capacitor / Android Studio:</strong> Bungkus folder berisi <code>index.html</code>, <code>manifest.json</code>, dan <code>sw.js</code> menjadi APK/AAB untuk distribusi internal PPG Garut Selatan.</li>
+          </ul>
+          <div class="pt-2 flex flex-wrap gap-2">
+            <button onclick="downloadManifestJSON()" class="px-3 py-1.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold cursor-pointer">
+              Unduh manifest.json
+            </button>
+            <button onclick="downloadServiceWorkerJS()" class="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-emerald-950 text-xs font-bold cursor-pointer">
+              Unduh sw.js (Service Worker)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-5 py-3.5 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 flex justify-end">
+        <button onclick="closeInstallGuideModal()" class="px-4 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white text-xs sm:text-sm font-bold cursor-pointer">
+          Mengerti
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal (replaces confirm()) -->
+  <div id="confirmModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-sm w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-5 space-y-4">
+      <h4 id="confirmTitle" class="text-base font-extrabold text-slate-900 dark:text-white">Konfirmasi</h4>
+      <p id="confirmMessage" class="text-xs sm:text-sm text-slate-600 dark:text-slate-300"></p>
+      <div class="flex justify-end gap-2 pt-1">
+        <button id="confirmCancelBtn" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold cursor-pointer">Batal</button>
+        <button id="confirmOkBtn" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold cursor-pointer">Ya, Lanjutkan</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. COMPLETE CURRICULUM DATA FROM PDF (PPG DAERAH GARUT SELATAN)
+    // =========================================================================
+    const CURRICULUM_DATA = {
+      matriks: [
+        {
+          no: 1,
+          bidang: 'Bacaan Tilawati (Individual - Target Khatam Jilid 1-6 di Kelas)',
+          jenjang: ['PAUD', 'KLS1', 'KLS2', 'KLS3'],
+          deskripsi: [
+            'Distribusi Target 8 Semester (PAUD s/d SD Kelas 3):',
+            '• PAUD (Smt 1 & 2): Tilawati PAUD (44 hal) & pengenalan awal Jilid 1 (Peraga PAUD: 20 hal, target 12x khatam); pengenalan huruf hijaiyah & tanda baca fathah.',
+            '• SD Kelas 1 (Smt 1 & 2): Tuntas Tilawati Jilid 1 (44 hal/smt) & Jilid 2 (44 hal/smt) (Peraga Jilid 1 & 2: masing-masing 20 hal, target 12x khatam/smt); harokat fathah-dlommatain, panjang 1 alif, bentuk Ta\'.',
+            '• SD Kelas 2 (Smt 1 & 2): Tuntas Tilawati Jilid 3 (44 hal/smt) & Jilid 4 (44 hal/smt) (Peraga Jilid 3 & 4: masing-masing 20 hal, target 12x khatam/smt); huruf sukun, tasydid, Idghom Bighunnah, Ikhfa\', Mad Wajib & Mad Jaiz.',
+            '• SD Kelas 3 (Smt 1 & 2): Tuntas Tilawati Jilid 5 (44 hal/smt) & Jilid 6 (44 hal/smt) + Persiapan Munaqosyah (Peraga Jilid 5 & 6: masing-masing 20 hal, target 12x khatam/smt); Qolqolah, Iqlab, Idhar, Idghom Bilaghunnah, Mad Lazim, tanda Waqof, Musykilat & Ghorib.',
+            'Ritme Capaian per Jilid: Buku Tilawati: 1 bulan = 8-9 hal; 1 minggu = 2-3 hal | Peraga Tilawati: 1 bulan = 48 hal; 1 minggu = 12 hal.'
+          ]
+        },
+        {
+          no: 2,
+          bidang: 'Menulis Huruf Arab (Individual - Selaras Jenjang Tilawati)',
+          jenjang: ['PAUD', 'KLS1', 'KLS2', 'KLS3'],
+          deskripsi: [
+            'Distribusi Target Kitabati / Kitabaty & Menyalin Surat Pendek (8 Semester):',
+            '• PAUD (Smt 1 & 2): Kitabati PAUD Jilid 1 & 2 = 60 halaman (±30 hal/smt; 1 bulan = 5-6 hal; 1 minggu = 1-2 hal); menulis huruf tunggal hijaiyah & angka Arab.',
+            '• SD Kelas 1 (Smt 1 & 2): Tuntas Kitabaty Jilid 1 (44 hal/smt) & Jilid 2 (44 hal/smt); menulis huruf tunggal fathah, angka Arab, dan huruf sambung (depan, tengah, belakang).',
+            '• SD Kelas 2 (Smt 1 & 2): Tuntas Kitabaty Jilid 3 (44 hal/smt) & Jilid 4 (44 hal/smt); menulis rangkaian kata & kata Arab baku/potongan ayat.',
+            '• SD Kelas 3 (Smt 1 & 2): Dilanjutkan menyalin surat-surat pendek (target surat pendek Juz \'Amma); pemantapan keterampilan menulis mushaf, hafalan harokat lengkap, dan kaidah penulisan ayat Al-Qur\'an.',
+            'Ritme Capaian Menulis: Kitabaty (SD Kelas 1-2): 1 semester = 44 hal | 1 bulan = 8-9 hal | 1 minggu = 2-3 hal; Menyalin Surat-surat Pendek (SD Kelas 3): bertahap sesuai urutan surat pendek.'
+          ]
+        },
+        {
+          no: 3,
+          bidang: 'Hafalan Asmaul Husna (Klasikal Gabungan)',
+          jenjang: ['PAUD', 'KLS1', 'KLS2', 'KLS3'],
+          deskripsi: [
+            'Total 80 Asmaul Husna (Urutan 1-80) - Target: 1 bulan = 3-4 Asmaul Husna; 1 minggu = 1 Asmaul Husna.',
+            '• Tahap 1 (PAUD): Urutan 1-20',
+            '• Tahap 2 (SD Kelas 1 / Jilid 1-2): Urutan 21-40',
+            '• Tahap 3 (SD Kelas 2 / Jilid 3-4): Urutan 41-60',
+            '• Tahap 4 (SD Kelas 3 / Jilid 5-6): Urutan 61-80'
+          ]
+        },
+        {
+          no: 4,
+          bidang: 'Hafalan Do\'a Harian (Klasikal Gabungan)',
+          jenjang: ['PAUD', 'KLS1', 'KLS2', 'KLS3'],
+          deskripsi: [
+            'Total 30 Do\'a Harian Terpadu:',
+            '• Kelompok A (PAUD): Kebaikan dunia akhirat, kedua orang tua, berjabat tangan, sebelum & sesudah makan/minum, lupa baca do\'a makan, akan & bangun tidur, masuk & keluar WC.',
+            '• Kelompok B (SD Kelas 1): Mencari ilmu 1, sesudah minum susu, ketika marah, ketetapan iman, minta ilham yang baik, masuk rumah, keluar rumah, pagi dan sore, masuk & keluar masjid, memakai pakaian, berbuka puasa.',
+            '• Kelompok C (SD Kelas 2): Mencari ilmu 2, sebelum & sesudah wudhu, berdiri setelah duduk (kafaratul majelis), turun hujan, mendengar petir, mohon kesabaran, mohon kesehatan.',
+            '• Kelompok D (SD Kelas 3): Menjenguk orang sakit, memakai pakaian baru, ketika bersin, ada angin kencang, naik kendaraan, lailatul qodar, masuk pasar, berlindung dari syirik, berlindung dari siksa kubur, sesudah adzan, terkena musibah.'
+          ]
+        },
+        {
+          no: 5,
+          bidang: 'Hafalan Surat Pendek (Klasikal Gabungan)',
+          jenjang: ['PAUD', 'KLS1', 'KLS2', 'KLS3'],
+          deskripsi: [
+            'Total 19 Surat Pendek (13 Target Utama Khatam Tilawati + 6 Pengayaan SD Kelas 2-3):',
+            '• Target Utama (13 Surat): Al-Fatihah, An-Nas, Al-Falaq, Al-Ikhlas, Al-Lahab, An-Nashr, Al-Kafirun, Al-Kautsar, Al-Ma\'un, Al-Quraisy, Al-Fil, Al-Humazah, Al-Ashr.',
+            '• Target Pengayaan Kelas 2-3 (6 Surat): At-Takatsur, Al-Qori\'ah, Al-\'Adiyat, Az-Zalzalah, Al-Bayyinah, Al-Qodr.'
+          ]
+        },
+        {
+          no: 6,
+          bidang: 'Hafalan Dalil (Klasikal Gabungan)',
+          jenjang: ['PAUD', 'KLS1', 'KLS2', 'KLS3'],
+          deskripsi: [
+            '3 Tema Dalil Utama (6 Dalil Al-Qur\'an & Hadits):',
+            '1. Dalil Mengaji (2 dalil) | 2. Dalil Mengamal (2 dalil) | 3. Dalil Membela (2 dalil)'
+          ]
+        },
+        {
+          no: 7,
+          bidang: 'Keilmuan, Kefahaman Agama & Akhlaqul Karimah (Klasikal Gabungan)',
+          jenjang: ['PAUD', 'KLS1', 'KLS2', 'KLS3'],
+          deskripsi: [
+            '• Keilmuan Dasar: Dasar-dasar aqidah; Rukun Iman, Rukun Islam & Ihsan; Pengertian Qur\'an Hadits Jamaah; Kemurnian ibadah; Wajibnya taat & haramnya maksiat; Hukum halal-haram; Thoharoh & sholat; Sholat sunah Rowatib; Puasa Romadlon (kefadlolan, hal yang diperbolehkan & membatalkan); Hukum mahrom.',
+            '• Kefahaman Agama: (1) Faham Surga Neraka: Perbuatan baik berpahala masuk surga, perbuatan jelek berdosa masuk neraka, 6 alam kehidupan manusia (alam ruh, rahim, dunia, kubur, qiyamat, akhirat), tujuan ibadah; (2) Faham Al-Qur\'an & Al-Hadits: Kewajiban beribadah kepada Allah, Rukun Iman & Islam, QHJ, halal-haram, taat-maksiat, suci-najis (thoharoh), batas-batas mahrom, kemurnian ibadah; (3) Faham Jamaah: Lima Bab, Empat Tali Keimanan, Tri Sukses Generasi Penerus, Enam Thobiat Luhur Jamaah, pengertian & wajibnya berjamaah.',
+            '• Akhlaqul Karimah (Pribadi, Keluarga, Ulil Amri, Masyarakat & Lingkungan): Pembiasaan sifat jujur, amanah, mujhid-muzhid (Enam Thobiat Luhur), syukur, sabar, dermawan, pemaaf, kasih sayang, tawadu\', husnudhon, ramah-tamah, sopan-santun, disiplin, tertib, bersih & rapi; menghindari akhlaq tercela (amarah, dendam, iri hati, bohong, kikir, rakus, menghina, mencela, meremehkan, bertengkar, menganiaya, mencuri, menggasap, merusak, jahil/usil, mengumpat/misuh, membully); serta berbuat baik kepada orangtua, saudara, kerabat, Ulil Amri, guru/mubaligh-muballighot, teman, tetangga, tamu, dan lingkungan alam sekitar.',
+            '• Adab / Tatakrama Keseharian (18 Aspek): Tatakrama berjabat tangan, uluk salam, mengucapkan syukur; tatakrama kepada orangtua, saudara tua & muda, guru & mubaligh-muballighot, bergaul dengan teman, di masjid, di tempat pengajian & sekolah, terhadap lingkungan, terhadap Ulil Amri, bertamu & kedatangan tamu, berpakaian sesuai syariat Islam, tidur, menguap, bersin, terhadap kerabat, terhadap tetangga, bersepeda, makan bersama, serta tatakrama mencari ilmu.'
+          ]
+        },
+        {
+          no: 8,
+          bidang: 'Bacaan & Praktek Ibadah (Klasikal Gabungan)',
+          jenjang: ['PAUD', 'KLS1', 'KLS2', 'KLS3'],
+          deskripsi: [
+            '• Bacaan Sholat: Do\'a Iftitah, Ruku\', I\'tidal, Sujud, Duduk antara 2 sujud, Tasyahud, dan Sholawat.',
+            '• Praktek Ibadah Terpadu: Praktek wudhu beserta doa sebelum & sesudahnya; praktek menjaga kesucian (suci-najis); tata cara buang air kecil & besar serta mensucikan najis (istinja\'); praktek sholat fardhu (12 tahapan) beserta bacaan & doanya; sholat berjamaah; dzikir setiap selesai sholat; sholat sunah rowatib; latihan puasa Romadlon; menjaga pergaulan antara laki-laki & perempuan bukan mahrom; serta mempraktikkan doa-doa harian.'
+          ]
+        },
+        {
+          no: 9,
+          bidang: 'ORSEN & Kemandirian (Klasikal Gabungan)',
+          jenjang: ['PAUD', 'KLS1', 'KLS2', 'KLS3'],
+          deskripsi: [
+            '• ORSEN: Olahraga; bermain, bercerita, menyanyi/bersyair, dan tepuk-tepuk; kerajinan/keterampilan.',
+            '• Pembiasaan Kemandirian (Pribadi, Keluarga, Jamaah & Sekolah): Makan-minum, mandi, buang air, dan berpakaian secara mandiri; menempatkan pakaian bersih/kotor pada tempatnya; menyiapkan peralatan sekolah & mengaji; mengatur waktu ibadah, mengaji, belajar, bermain & istirahat; mencuci alat makan sendiri; melipat & menata pakaian di almari; membuang sampah pada tempatnya; merapikan tempat tidur & meja belajar; menyapu lantai; tidak ditunggui orangtua saat mengaji/sekolah; serta tanggap terhadap perilaku isrof & mubadzir (memadamkan lampu, kipas/AC, dan menutup keran air).'
+          ]
+        }
+      ],
+
+      asmaul: [
+        // Tahap 1 (PAUD: 1-20)
+        { n: 1, tahap: '1', jenjang: 'PAUD', ar: 'يَا اللَّهُ الَّذِي لَا إِلَهَ إِلَّا أَنْتَ', tr: 'Yaa Allohulladzii laa ilaaha illaa anta' },
+        { n: 2, tahap: '1', jenjang: 'PAUD', ar: 'يَا رَحْمَنُ', tr: 'Yaa Rohmaanu' },
+        { n: 3, tahap: '1', jenjang: 'PAUD', ar: 'يَا رَحِيمُ', tr: 'Yaa Rohiimu' },
+        { n: 4, tahap: '1', jenjang: 'PAUD', ar: 'يَا مَلِكُ', tr: 'Yaa Maliku' },
+        { n: 5, tahap: '1', jenjang: 'PAUD', ar: 'يَا قُدُّوسُ', tr: 'Yaa Qudduusu' },
+        { n: 6, tahap: '1', jenjang: 'PAUD', ar: 'يَا سَلَامُ', tr: 'Yaa Salaamu' },
+        { n: 7, tahap: '1', jenjang: 'PAUD', ar: 'يَا مُؤْمِنُ', tr: 'Yaa Mu\'minu' },
+        { n: 8, tahap: '1', jenjang: 'PAUD', ar: 'يَا مُهَيْمِنُ', tr: 'Yaa Muhaiminu' },
+        { n: 9, tahap: '1', jenjang: 'PAUD', ar: 'يَا عَزِيزٌ', tr: 'Yaa \'Aziizu' },
+        { n: 10, tahap: '1', jenjang: 'PAUD', ar: 'يَا جَبَّارُ', tr: 'Yaa Jabbaaru' },
+        { n: 11, tahap: '1', jenjang: 'PAUD', ar: 'يَا مُتَكَبِّرُ', tr: 'Yaa Mutakabbiru' },
+        { n: 12, tahap: '1', jenjang: 'PAUD', ar: 'يَا خَالِقُ', tr: 'Yaa Khooliqu' },
+        { n: 13, tahap: '1', jenjang: 'PAUD', ar: 'يَا بَارِئُ', tr: 'Yaa Baari\'u' },
+        { n: 14, tahap: '1', jenjang: 'PAUD', ar: 'يَا مُصَوِّرُ', tr: 'Yaa Mushowwiru' },
+        { n: 15, tahap: '1', jenjang: 'PAUD', ar: 'يَا غَفَّارُ', tr: 'Yaa Ghoffaaru' },
+        { n: 16, tahap: '1', jenjang: 'PAUD', ar: 'يَا قَهَّارُ', tr: 'Yaa Qohhaaru' },
+        { n: 17, tahap: '1', jenjang: 'PAUD', ar: 'يَا وَهَّابُ', tr: 'Yaa Wahhaabu' },
+        { n: 18, tahap: '1', jenjang: 'PAUD', ar: 'يَا رَزَّاقُ', tr: 'Yaa Rozzaaqu' },
+        { n: 19, tahap: '1', jenjang: 'PAUD', ar: 'يَا فَتَّاحُ', tr: 'Yaa Fattaahu' },
+        { n: 20, tahap: '1', jenjang: 'PAUD', ar: 'يَا عَلِيمُ', tr: 'Yaa \'Aliimu' },
+
+        // Tahap 2 (Kls 1: 21-40)
+        { n: 21, tahap: '2', jenjang: 'KLS1', ar: 'يَا قَابِضُ', tr: 'Yaa Qoobidhu' },
+        { n: 22, tahap: '2', jenjang: 'KLS1', ar: 'يَا بَاسِطُ', tr: 'Yaa Baasithu' },
+        { n: 23, tahap: '2', jenjang: 'KLS1', ar: 'يَا خَافِضُ', tr: 'Yaa Khoofidhu' },
+        { n: 24, tahap: '2', jenjang: 'KLS1', ar: 'يَا رَافِعُ', tr: 'Yaa Roofi\'u' },
+        { n: 25, tahap: '2', jenjang: 'KLS1', ar: 'يَا مُعِزُّ', tr: 'Yaa Mu\'izzu' },
+        { n: 26, tahap: '2', jenjang: 'KLS1', ar: 'يَا مُذِلُّ', tr: 'Yaa Mudzillu' },
+        { n: 27, tahap: '2', jenjang: 'KLS1', ar: 'يَا سَمِيعُ', tr: 'Yaa Samii\'u' },
+        { n: 28, tahap: '2', jenjang: 'KLS1', ar: 'يَا بَصِيرُ', tr: 'Yaa Bashiiru' },
+        { n: 29, tahap: '2', jenjang: 'KLS1', ar: 'يَا حَكَمُ', tr: 'Yaa Hakamu' },
+        { n: 30, tahap: '2', jenjang: 'KLS1', ar: 'يَا عَدْلُ', tr: 'Yaa \'Adlu' },
+        { n: 31, tahap: '2', jenjang: 'KLS1', ar: 'يَا لَطِيفُ', tr: 'Yaa Lathiifu' },
+        { n: 32, tahap: '2', jenjang: 'KLS1', ar: 'يَا خَبِيرٌ', tr: 'Yaa Khobiiru' },
+        { n: 33, tahap: '2', jenjang: 'KLS1', ar: 'يَا حَلِيمُ', tr: 'Yaa Haliimu' },
+        { n: 34, tahap: '2', jenjang: 'KLS1', ar: 'يَا عَظِيمُ', tr: 'Yaa \'Azhiimu' },
+        { n: 35, tahap: '2', jenjang: 'KLS1', ar: 'يَا غَفُورُ', tr: 'Yaa Ghofuuru' },
+        { n: 36, tahap: '2', jenjang: 'KLS1', ar: 'يَا شَكُورُ', tr: 'Yaa Syakuuru' },
+        { n: 37, tahap: '2', jenjang: 'KLS1', ar: 'يَا عَلِيُّ', tr: 'Yaa \'Aliyyu' },
+        { n: 38, tahap: '2', jenjang: 'KLS1', ar: 'يَا كَبِيرُ', tr: 'Yaa Kabiiru' },
+        { n: 39, tahap: '2', jenjang: 'KLS1', ar: 'يَا حَفِيظٌ', tr: 'Yaa Hafiizhu' },
+        { n: 40, tahap: '2', jenjang: 'KLS1', ar: 'يَا مُقِيتُ', tr: 'Yaa Muqiitu' },
+
+        // Tahap 3 (Kls 2: 41-60)
+        { n: 41, tahap: '3', jenjang: 'KLS2', ar: 'يَا حَسِيبُ', tr: 'Yaa Hasiibu' },
+        { n: 42, tahap: '3', jenjang: 'KLS2', ar: 'يَا جَلِيلُ', tr: 'Yaa Jaliilu' },
+        { n: 43, tahap: '3', jenjang: 'KLS2', ar: 'يَا كَرِيمُ', tr: 'Yaa Kariimu' },
+        { n: 44, tahap: '3', jenjang: 'KLS2', ar: 'يَا رَقِيبٌ', tr: 'Yaa Roqiibu' },
+        { n: 45, tahap: '3', jenjang: 'KLS2', ar: 'يَا مُجِيبُ', tr: 'Yaa Mujiibu' },
+        { n: 46, tahap: '3', jenjang: 'KLS2', ar: 'يَا وَاسِعُ', tr: 'Yaa Waasi\'u' },
+        { n: 47, tahap: '3', jenjang: 'KLS2', ar: 'يَا حَكِيمُ', tr: 'Yaa Hakiimu' },
+        { n: 48, tahap: '3', jenjang: 'KLS2', ar: 'يَا وَدُودُ', tr: 'Yaa Waduudu' },
+        { n: 49, tahap: '3', jenjang: 'KLS2', ar: 'يَا مَجِيدٌ', tr: 'Yaa Majiidu' },
+        { n: 50, tahap: '3', jenjang: 'KLS2', ar: 'يَا بَاعِثُ', tr: 'Yaa Baa\'itsu' },
+        { n: 51, tahap: '3', jenjang: 'KLS2', ar: 'يَا شَهِيدُ', tr: 'Yaa Syahiidu' },
+        { n: 52, tahap: '3', jenjang: 'KLS2', ar: 'يَا حَقُّ', tr: 'Yaa Haqqu' },
+        { n: 53, tahap: '3', jenjang: 'KLS2', ar: 'يَا وَكِيلٌ', tr: 'Yaa Wakiilu' },
+        { n: 54, tahap: '3', jenjang: 'KLS2', ar: 'يَا قَوِيٌّ', tr: 'Yaa Qowiyyu' },
+        { n: 55, tahap: '3', jenjang: 'KLS2', ar: 'يَا مَتِينُ', tr: 'Yaa Matiinu' },
+        { n: 56, tahap: '3', jenjang: 'KLS2', ar: 'يَا وَلِيُّ', tr: 'Yaa Waliyyu' },
+        { n: 57, tahap: '3', jenjang: 'KLS2', ar: 'يَا حَمِيدٌ', tr: 'Yaa Hamiidu' },
+        { n: 58, tahap: '3', jenjang: 'KLS2', ar: 'يَا مُحْصِي', tr: 'Yaa Muhshii' },
+        { n: 59, tahap: '3', jenjang: 'KLS2', ar: 'يَا مُبْدِئُ', tr: 'Yaa Mubdi\'u' },
+        { n: 60, tahap: '3', jenjang: 'KLS2', ar: 'يَا مُعِيدُ', tr: 'Yaa Mu\'iidu' },
+
+        // Tahap 4 (Kls 3: 61-80)
+        { n: 61, tahap: '4', jenjang: 'KLS3', ar: 'يَا مُحْيِي', tr: 'Yaa Muhyii' },
+        { n: 62, tahap: '4', jenjang: 'KLS3', ar: 'يَا مُمِيتُ', tr: 'Yaa Mumiitu' },
+        { n: 63, tahap: '4', jenjang: 'KLS3', ar: 'يَا حَيُّ', tr: 'Yaa Hayyu' },
+        { n: 64, tahap: '4', jenjang: 'KLS3', ar: 'يَا قَيُّومُ', tr: 'Yaa Qoyyuumu' },
+        { n: 65, tahap: '4', jenjang: 'KLS3', ar: 'يَا وَاجِدُ', tr: 'Yaa Waajidu' },
+        { n: 66, tahap: '4', jenjang: 'KLS3', ar: 'يَا مَاجِدُ', tr: 'Yaa Maajidu' },
+        { n: 67, tahap: '4', jenjang: 'KLS3', ar: 'يَا وَاحِدُ', tr: 'Yaa Waahidu' },
+        { n: 68, tahap: '4', jenjang: 'KLS3', ar: 'يَا صَمَدُ', tr: 'Yaa Shomadu' },
+        { n: 69, tahap: '4', jenjang: 'KLS3', ar: 'يَا قَادِرُ', tr: 'Yaa Qoodiru' },
+        { n: 70, tahap: '4', jenjang: 'KLS3', ar: 'يَا مُقْتَدِرُ', tr: 'Yaa Muqtadiru' },
+        { n: 71, tahap: '4', jenjang: 'KLS3', ar: 'يَا مُقَدِّمُ', tr: 'Yaa Muqoddimu' },
+        { n: 72, tahap: '4', jenjang: 'KLS3', ar: 'يَا مُؤَخِّرُ', tr: 'Yaa Mu-akhkhiru' },
+        { n: 73, tahap: '4', jenjang: 'KLS3', ar: 'يَا أَوَّلُ', tr: 'Yaa Awwalu' },
+        { n: 74, tahap: '4', jenjang: 'KLS3', ar: 'يَا آخِرُ', tr: 'Yaa Aakhiru' },
+        { n: 75, tahap: '4', jenjang: 'KLS3', ar: 'يَا ظَاهِرُ', tr: 'Yaa Zhoohiru' },
+        { n: 76, tahap: '4', jenjang: 'KLS3', ar: 'يَا بَاطِنُ', tr: 'Yaa Baathinu' },
+        { n: 77, tahap: '4', jenjang: 'KLS3', ar: 'يَا وَالِي', tr: 'Yaa Waalii' },
+        { n: 78, tahap: '4', jenjang: 'KLS3', ar: 'يَا مُتَعَالِي', tr: 'Yaa Muta\'aalii' },
+        { n: 79, tahap: '4', jenjang: 'KLS3', ar: 'يَا بَرُّ', tr: 'Yaa Barru' },
+        { n: 80, tahap: '4', jenjang: 'KLS3', ar: 'يَا تَوَّابُ', tr: 'Yaa Tawwaabu' }
+      ],
+
+      doa: [
+        {
+          n: 1, kel: 'A', jenjang: 'PAUD',
+          judul: 'Do\'a kebaikan dunia akhirat',
+          sumber: 'QS. Al-Baqarah: 201',
+          ar: 'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',
+          tr: '"Robbanā ātinā fiddunyā hasanah wafil akhirati hasanah waqinā \'adzāban nār"'
+        },
+        {
+          n: 2, kel: 'A', jenjang: 'PAUD',
+          judul: 'Do\'a untuk kedua orang tua',
+          sumber: 'HR. At-Tirmidzi',
+          ar: 'رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا',
+          tr: '"Robbighfirli waliwālidayya warhamhumā kamā robbayānī shoghīrō"'
+        },
+        {
+          n: 3, kel: 'A', jenjang: 'PAUD',
+          judul: 'Do\'a berjabat tangan',
+          sumber: 'HR. Abu Dawud',
+          ar: 'الْحَمْدُ لِلَّهِ أَسْتَغْفِرُ اللَّهَ',
+          tr: '"Alhamdulillah Astaghfirullah"'
+        },
+        {
+          n: 4, kel: 'A', jenjang: 'PAUD',
+          judul: 'Do\'a sebelum dan sesudah makan dan minum',
+          sumber: 'HR. At-Tirmidzi',
+          ar: 'بِسْمِ اللهِ ** الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ',
+          tr: 'Sebelum makan/minum: "Bismillah" ** Sesudah makan/minum: "Alhamdulillāhil ladzī ath\'amanā wasaqōnā waja\'alanā muslimīn"'
+        },
+        {
+          n: 5, kel: 'A', jenjang: 'PAUD',
+          judul: 'Do\'a lupa membaca do\'a makan',
+          sumber: 'HR. At-Tirmidzi',
+          ar: 'بِسْمِ اللَّهِ أَوَّلَهُ وَآخِرَهُ',
+          tr: '"Bismillahi awwalahū wa akhiroh"'
+        },
+        {
+          n: 6, kel: 'B', jenjang: 'KLS1',
+          judul: 'Do\'a mencari ilmu 1',
+          sumber: 'HR. Ibnu Majah',
+          ar: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا وَعَمَلًا مُتَقَبَّلًا',
+          tr: '"Allōhumma innī as-aluka \'ilman nāfi\'an warizqon thoyyiban wa \'amalan mutaqobbalan"'
+        },
+        {
+          n: 7, kel: 'B', jenjang: 'KLS1',
+          judul: 'Do\'a sesudah minum susu',
+          sumber: 'HR. At-Tirmidzi',
+          ar: 'اللَّهُمَّ بَارِكْ لَنَا فِيْهِ وَزِدْنَا مِنْهُ',
+          tr: '"Allōhumma bāriklanā fihi wazidnā minhu"'
+        },
+        {
+          n: 8, kel: 'A', jenjang: 'PAUD',
+          judul: 'Do\'a akan dan bangun tidur',
+          sumber: 'HR. Al-Bukhari',
+          ar: 'اللَّهُمَّ بِاسْمِكَ أَمُوْتُ وَأَحْيَا | الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',
+          tr: 'Akan tidur: "Allōhumma bismika amūtu wa ahyā" | Bangun tidur: "Alhamdulillāhilladzī ahyānā ba\'da mā amātanā wa ilaihin nusyūr"'
+        },
+        {
+          n: 9, kel: 'A', jenjang: 'PAUD',
+          judul: 'Do\'a masuk dan keluar WC',
+          sumber: 'HR. Al-Bukhari & At-Tirmidzi',
+          ar: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ ** غُفْرَانَكَ',
+          tr: 'Masuk WC: "Allōhumma innī a\'ūdzubika minal khubutsi wal khobā-its" ** Keluar WC: "Ghufrōnak"'
+        },
+        {
+          n: 10, kel: 'B', jenjang: 'KLS1',
+          judul: 'Do\'a ketika marah',
+          sumber: 'HR. Al-Bukhari & At-Tirmidzi',
+          ar: 'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّحِيمِ',
+          tr: '"A\'ūdzubillāhi minasy-syaithōnir rojīm"'
+        },
+        {
+          n: 11, kel: 'C', jenjang: 'KLS2',
+          judul: 'Do\'a mencari ilmu 2',
+          sumber: 'HR. Ibnu Majah',
+          ar: 'اللَّهُمَّ انْفَعْنِي بِمَا عَلَّمْتَنِي وَعَلِّمْنِي مَا يَنْفَعُنِي وَزِدْنِي عِلْمًا وَالْحَمْدُ لِلَّهِ عَلَى كُلِّ حَالٍ وَأَعُوْذُ بِاللَّهِ مِنْ عَذَابِ النَّارِ',
+          tr: '"Allōhummanfa\'nī bimā \'allamtanī wa \'allimnī mā yanfa\'unī wazidnī \'ilman walhamdulillāhi \'alā kulli hālin wa a\'ūdzubillāhi min \'adzābin nār"'
+        },
+        {
+          n: 12, kel: 'C', jenjang: 'KLS2',
+          judul: 'Do\'a sebelum dan sesudah wudhu',
+          sumber: 'HR. Abu Dawud & Muslim',
+          ar: 'بِسْمِ اللَّهِ ** أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ',
+          tr: 'Sebelum wudhu: "Bismillah" ** Sesudah wudhu: "Asyhadu allā ilaha illallōh wa asyhadu anna Muhammadan \'abduhū warosūluh"'
+        },
+        {
+          n: 13, kel: 'C', jenjang: 'KLS2',
+          judul: 'Do\'a berdiri setelah duduk (Kafaratul Majelis)',
+          sumber: 'HR. At-Tirmidzi',
+          ar: 'سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ',
+          tr: '"Subhānakallōhumma wabihamdika asyhadu allā ilaha illā anta astaghfiruka wa atūbu ilaik"'
+        },
+        {
+          n: 14, kel: 'C', jenjang: 'KLS2',
+          judul: 'Do\'a ketika turun hujan',
+          sumber: 'HR. Al-Bukhari & An-Nasa\'i',
+          ar: 'اللَّهُمَّ اجْعَلْهُ صَيِّبًا نَافِعًا',
+          tr: '"Allōhummaj\'alhu shoyyiban nāfi\'ā"'
+        },
+        {
+          n: 15, kel: 'C', jenjang: 'KLS2',
+          judul: 'Do\'a mendengar petir',
+          sumber: 'HR. At-Tirmidzi',
+          ar: 'اللَّهُمَّ لَا تَقْتُلْنَا بِغَضَبِكَ وَلَا تُهْلِكْنَا بِعَذَابِكَ وَعَافِنَا قَبْلَ ذَلِكَ',
+          tr: '"Allōhumma lā taqtulnā bighodhobika walā tuhliknā bi\'adzābika wa \'āfinā qobla dzālik"'
+        },
+        {
+          n: 16, kel: 'B', jenjang: 'KLS1',
+          judul: 'Do\'a minta ilham yang baik',
+          sumber: 'HR. Muslim & At-Tirmidzi',
+          ar: 'اللَّهُمَّ أَلْهِمْنِي رُشْدِي وَأَعِذْنِي مِنْ شَرِّ نَفْسِي',
+          tr: '"Allōhumma alhimnī rusydī wa a\'idznī min syarri nafsi"'
+        },
+        {
+          n: 17, kel: 'B', jenjang: 'KLS1',
+          judul: 'Do\'a masuk rumah',
+          sumber: 'HR. Abu Dawud',
+          ar: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ الْمَوْلِجِ وَخَيْرَ الْمَخْرَجِ بِسْمِ اللَّهِ وَلَجْنَا وَبِسْمِ اللَّهِ خَرَجْنَا وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا',
+          tr: '"Allōhumma innī as-aluka khoirol mauliji wa khoirol makhroji bismillāhi walajnā wa bismillāhi khorojnā wa \'alallōhi robbinā tawakkalnā"'
+        },
+        {
+          n: 18, kel: 'B', jenjang: 'KLS1',
+          judul: 'Do\'a keluar rumah',
+          sumber: 'HR. At-Tirmidzi',
+          ar: 'بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',
+          tr: '"Bismillāhi tawakkaltu \'alallōhi là haula walā quwwata illā billāh"'
+        },
+        {
+          n: 19, kel: 'B', jenjang: 'KLS1',
+          judul: 'Do\'a masuk masjid',
+          sumber: 'HR. Muslim & Ibnu Majah',
+          ar: 'بِسْمِ اللَّهِ وَالسَّلَامُ عَلَى رَسُولِ اللهِ اللَّهُمَّ اغْفِرْ لِي ذُنُوبِي وَافْتَحْ لِي أَبْوَابَ رَحْمَتِكَ',
+          tr: '"Bismillāhi wassalāmu \'alā rosūlillāhi allōhummaghfirlī dzunūbī waftahlī abwāba rohmatik"'
+        },
+        {
+          n: 20, kel: 'B', jenjang: 'KLS1',
+          judul: 'Do\'a keluar masjid',
+          sumber: 'HR. Muslim & Ibnu Majah',
+          ar: 'بِسْمِ اللَّهِ وَالسَّلَامُ عَلَى رَسُولِ اللهِ اللَّهُمَّ اغْفِرْ لِي ذُنُوبِي وَافْتَحْ لِي أَبْوَابَ فَضْلِكَ',
+          tr: '"Bismillāhi wassalāmu \'alā rosūlillāhi allōhummaghfirlī dzunūbī waftahlī abwāba fadhlik"'
+        },
+        {
+          n: 21, kel: 'B', jenjang: 'KLS1',
+          judul: 'Do\'a memakai pakaian',
+          sumber: 'HR. Abu Dawud',
+          ar: 'الْحَمْدُ لِلَّهِ الَّذِي كَسَانِي هَذَا التَّوْبَ وَرَزَقَنِيْهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ',
+          tr: '"Alhamdulillāhil ladzī kasānī hādzats-tsauba warozaqonīhi min ghoiri haulim minnī walā quwwah"'
+        },
+        {
+          n: 22, kel: 'B', jenjang: 'KLS1',
+          judul: 'Do\'a ketika berbuka puasa',
+          sumber: 'HR. Abu Dawud',
+          ar: 'ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ',
+          tr: '"Dzahabazh-zhoma-u wabtallatil \'urūqu watsabatal ajru insya Allōh"'
+        },
+        {
+          n: 23, kel: 'D', jenjang: 'KLS3',
+          judul: 'Do\'a sesudah adzan',
+          sumber: 'HR. Al-Bukhari',
+          ar: 'اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ وَالصَّلَاةِ الْقَائِمَةِ آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ',
+          tr: '"Allōhumma robba hādzihid-da\'watit-tāmmah wash-sholātil-qō-imah āti Muhammadanil-wasīlata wal-fadhilah wab\'atshu maqōmam-mahmūdanil-ladzī wa\'adtah"'
+        },
+        {
+          n: 24, kel: 'D', jenjang: 'KLS3',
+          judul: 'Do\'a ketika menjenguk orang sakit',
+          sumber: 'HR. Al-Bukhari',
+          ar: 'لَا بَأْسَ طَهُورٌ إِنْ شَاءَ اللَّهُ',
+          tr: '"Lā ba\'sa thohūrun insya Allōh"'
+        },
+        {
+          n: 25, kel: 'D', jenjang: 'KLS3',
+          judul: 'Do\'a ketika naik kendaraan',
+          sumber: 'QS. Az-Zukhruf: 13-14',
+          ar: 'بِسْمِ اللَّهِ سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ',
+          tr: '"Bismillāhi subhānal-ladzī sakhkhoro lanā hādzā wamā kunnā lahū muqrinīn wa innā ilā robbinā lamunqolibūn"'
+        },
+        {
+          n: 26, kel: 'D', jenjang: 'KLS3',
+          judul: 'Do\'a lailatul qodar',
+          sumber: 'HR. At-Tirmidzi',
+          ar: 'اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي',
+          tr: '"Allōhumma innaka \'afuwwun tuhibbul \'afwa fa\'fu \'annī"'
+        },
+        {
+          n: 27, kel: 'D', jenjang: 'KLS3',
+          judul: 'Do\'a ketika masuk pasar',
+          sumber: 'HR. At-Tirmidzi',
+          ar: 'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ حَيٍّ لَا يَمُوتُ بِيَدِهِ الْخَيْرُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',
+          tr: '"La ilaha illallohu wahdahū lā syarīka lah lahul mulku walahul hamdu yuhyī wayumītu wahuwa hayyul lā yamūt biyadihil khoiru wahuwa \'alā kulli syai-in qodir"'
+        },
+        {
+          n: 28, kel: 'D', jenjang: 'KLS3',
+          judul: 'Do\'a berlindung dari syirik',
+          sumber: 'HR. Ahmad',
+          ar: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ أَنْ أُشْرِكَ بِكَ وَأَنَا أَعْلَمُ وَأَسْتَغْفِرُكَ لِمَا لَا أَعْلَمُ',
+          tr: '"Allōhumma innī a\'ūdzubika an usyrika bika wa ana a\'lamu wa astaghfiruka limā lā a\'lam"'
+        },
+        {
+          n: 29, kel: 'D', jenjang: 'KLS3',
+          judul: 'Do\'a berlindung dari siksa kubur',
+          sumber: 'HR. Al-Bukhari & Muslim',
+          ar: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ وَمِنْ عَذَابِ النَّارِ وَمِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ وَمِنْ فِتْنَةِ الْمَسِيحِ الدَّجَّالِ',
+          tr: '"Allōhumma innī a\'ūdzubika min \'adzābil qobri wamin \'adzābin nāri wamin fitnatil mahyā wal mamāti wamin fitnatil masīhid-dajjal"'
+        },
+        {
+          n: 30, kel: 'D', jenjang: 'KLS3',
+          judul: 'Do\'a ketika terkena musibah',
+          sumber: 'QS. Al-Baqarah: 156 & HR. Muslim',
+          ar: 'إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ اللَّهُمَّ أَجْرْنِي فِي مُصِيبَتِي وَأُخْلِفْ لِي خَيْرًا مِنْهَا',
+          tr: '"Innā lillāhi wa innā ilaihi rōji\'ūn allōhumma\'-jurnī fi mushībatī wa akhlif lī khoirom-minhā"'
+        }
+      ],
+
+      suratKelompok: [
+        {
+          kel: 'Kelompok 1 (PAUD)',
+          jenjang: 'PAUD',
+          badgeColor: 'bg-emerald-700 text-white',
+          items: [
+            { n: 1, nama: 'Surat Al-Fatihah', ayat: '7 ayat', tipe: 'Target Utama' },
+            { n: 2, nama: 'Surat An-Nas', ayat: '6 ayat', tipe: 'Target Utama' },
+            { n: 3, nama: 'Surat Al-Falaq', ayat: '5 ayat', tipe: 'Target Utama' },
+            { n: 4, nama: 'Surat Al-Ikhlas', ayat: '4 ayat', tipe: 'Target Utama' }
+          ]
+        },
+        {
+          kel: 'Kelompok 2 (Kelas 1 / Jilid 1–2)',
+          jenjang: 'KLS1',
+          badgeColor: 'bg-amber-500 text-emerald-950',
+          items: [
+            { n: 5, nama: 'Surat Al-Lahab', ayat: '5 ayat', tipe: 'Target Utama' },
+            { n: 6, nama: 'Surat An-Nashr', ayat: '3 ayat', tipe: 'Target Utama' },
+            { n: 7, nama: 'Surat Al-Kafirun', ayat: '6 ayat', tipe: 'Target Utama' }
+          ]
+        },
+        {
+          kel: 'Kelompok 3 (Kelas 2 / Jilid 3–4)',
+          jenjang: 'KLS2',
+          badgeColor: 'bg-teal-700 text-white',
+          items: [
+            { n: 8, nama: 'Surat Al-Kautsar', ayat: '3 ayat', tipe: 'Target Utama' },
+            { n: 9, nama: 'Surat Al-Ma\'un', ayat: '7 ayat', tipe: 'Target Utama' },
+            { n: 10, nama: 'Surat Al-Quraisy', ayat: '4 ayat', tipe: 'Target Utama' },
+            { n: 14, nama: 'Surat At-Takatsur', ayat: '8 ayat', tipe: 'Pengayaan' },
+            { n: 15, nama: 'Surat Al-Qori\'ah', ayat: '11 ayat', tipe: 'Pengayaan' }
+          ]
+        },
+        {
+          kel: 'Kelompok 4 (Kelas 3 / Jilid 5–6)',
+          jenjang: 'KLS3',
+          badgeColor: 'bg-emerald-950 text-amber-300',
+          items: [
+            { n: 11, nama: 'Surat Al-Fil', ayat: '5 ayat', tipe: 'Target Utama' },
+            { n: 12, nama: 'Surat Al-Humazah', ayat: '9 ayat', tipe: 'Target Utama' },
+            { n: 13, nama: 'Surat Al-Ashr', ayat: '3 ayat', tipe: 'Target Utama' },
+            { n: 16, nama: 'Surat Al-\'Adiyat', ayat: '11 ayat', tipe: 'Pengayaan' },
+            { n: 17, nama: 'Surat Az-Zalzalah', ayat: '8 ayat', tipe: 'Pengayaan' },
+            { n: 18, nama: 'Surat Al-Bayyinah', ayat: '8 ayat', tipe: 'Pengayaan' },
+            { n: 19, nama: 'Surat Al-Qodr', ayat: '5 ayat', tipe: 'Pengayaan' }
+          ]
+        }
+      ],
+
+      dalil: [
+        {
+          tema: 'Tema 1: Dalil Mengaji',
+          items: [
+            {
+              kode: '1.a',
+              ar: 'قَالَ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ : طَلَبُ الْعِلْمِ فَرِيضَةً عَلَى كُلِّ مُسْلِمٍ (رواه ابن ماجة)',
+              tr: '"Tholabul \'ilmi faridhotun \'alā kulli muslim"',
+              arti: '"Mencari ilmu itu wajib bagi tiap-tiap muslim."'
+            },
+            {
+              kode: '1.b',
+              ar: 'الْعِلْمُ ثَلَاثَةٌ وَمَا سِوَى ذَلِكَ فَهُوَ فَضْلٌ : آيَةٌ مُحْكَمَةٌ أَوْ سُنَةٌ قَائِمَةً أَوْ فَرِيضَةٌ عَادِلَةٌ (رواه أبو داود)',
+              tr: '"Al-\'ilmu tsalātsatun wamā siwā dzālika fahuwa fadhlun: āyatun muhkamatun au sunnatun qō-imatun au farīdhotun \'ādilah"',
+              arti: '"Ilmu ada tiga selain itu lebihan, yaitu ayat yang menghukumi, sunnah yang tegak, ilmu bagi waris yang adil."'
+            }
+          ]
+        },
+        {
+          tema: 'Tema 2: Dalil Mengamal',
+          items: [
+            {
+              kode: '2.a',
+              ar: 'قَالَ اللَّهُ تَعَالَى: وَتِلْكَ الْجَنَّةُ الَّتِي أُوْرِثْتُمُوهَا بِمَا كُنْتُمْ تَعْمَلُونَ (سورة الزخرف: ۷۲)',
+              tr: '"Watilkal jannatul latī ūrits-tumūhā bimā kuntum ta\'malūn"',
+              arti: '"Demikian itu surga diwariskan kepadamu sebab perbuatanmu/pengamalanmu."'
+            },
+            {
+              kode: '2.b',
+              ar: 'مَنْ عَمِلَ صَالِحًا فَلِنَفْسِهِ وَمَنْ أَسَاءَ فَعَلَيْهَا وَمَا رَبُّكَ بِظَلَّامٍ لِلْعَبِيدِ (سورة فصلت: ٤٦)',
+              tr: '"Man \'amila shōlihan falinafsihi waman asā-a fa\'alaihā wamā robbuka bizhollāmil lil\'abīd"',
+              arti: '"Barangsiapa yang mengerjakan amal yang sholih/baik, maka (pahalanya bermanfaat) untuk dirinya sendiri, dan barangsiapa mengerjakan amal yang jelek, maka (dosanya akan memberatkan) pada dirinya sendiri; Dan sekali-kali Tuhanmu (Muhammad) tidak akan menganiaya pada hamba-hamba-Nya."'
+            }
+          ]
+        },
+        {
+          tema: 'Tema 3: Dalil Membela',
+          items: [
+            {
+              kode: '3.a',
+              ar: 'قَالَ اللَّهُ تَعَالَى : انْفِرُوْا خِفَافًا وَثِقَالًا وَجَاهِدُوا بِأَمْوَالِكُمْ وَأَنْفُسِكُمْ فِي سَبِيْلِ اللَّهِ ذَلِكُمْ خَيْرٌ لَكُمْ إِنْ كُنْتُمْ تَعْلَمُونَ (سورة التوبة : ٤١)',
+              tr: '"Infirū khifāfaw watsiqõlaw wajāhidū bi-amwālikum wa-anfusikum fi sabīlillāhi dzālikum khoirul lakum in kuntum ta\'lamūn"',
+              arti: '"Berangkatlah kamu dengan keadaan ringan dan berat, dan belalah agama Allah dengan harta dan dirimu, seperti itu baik bagimu jika kamu tahu."'
+            },
+            {
+              kode: '3.b',
+              ar: 'يَا ابْنَ آدَمَ أَنْفِقُ أُنْفِقْ عَلَيْكَ (رواه مسلم)',
+              tr: '"Ya ibna Ādama anfiq unfiq \'alaik"',
+              arti: '"Wahai anak turunnya Adam infaklah kamu maka Aku (Allah) akan menginfaki padamu."'
+            }
+          ]
+        }
+      ],
+
+      keilmuanIbadah: {
+        tataCara: [
+          {
+            judul: 'Tata cara berjabat tangan',
+            isi: 'Dengan sesama mahrom (laki-laki dengan laki-laki, perempuan dengan perempuan); menyesuaikan keadaan (teman, orang tua, guru/mubaligh/pengurus); mencium tangan bila dengan orang tua atau yang lebih tua; mengucapkan lafadz الْحَمْدُ لِلَّهِ أَسْتَغْفِرُ اللهَ ("Alhamdulillah Astaghfirullah"); memandang wajah yang diajak berjabat tangan; tidak melepaskan tangan lebih dulu sebelum dilepaskan; tidak berjabat tangan untuk bergurau (guyonan).'
+          },
+          {
+            judul: 'Tata cara uluk salam',
+            isi: 'Membaca salam اَلسَّلَامُ عَلَيْكُمْ، وَرَحْمَةُ اللَّهِ، وَبَرَكَاتُهُ، وَمَغْفِرَتُهُ dan menjawab وَعَلَيْكُمُ السَّلَامُ، وَرَحْمَةُ اللَّهِ، وَبَرَكَاتُهُ، وَمَغْفِرَتُهُ. Membiasakan salam, berjabat tangan, dan membaca do\'a الْحَمْدُ لِلَّهِ أَسْتَغْفِرُ اللَّهَ bila bertemu sesama orang iman.'
+          },
+          {
+            judul: 'Mengucapkan syukur',
+            isi: 'Bersyukur kepada Allah (اَلْحَمْدُ لِلَّهِ / الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ), kepada orang laki-laki (اَلْحَمْدُ لِلَّهِ جَزَاكَ اللَّهُ خَيْرًا), kepada orang perempuan (اَلْحَمْدُ لِلَّهِ جَزَاكِ اللَّهُ خَيْرًا), kepada orang banyak hadir (اَلْحَمْدُ لِلَّهِ جَزَاكُمُ اللَّهُ خَيْرًا), kepada orang banyak ghoib/tidak hadir (اَلْحَمْدُ لِلَّهِ جَزَاهُمُ اللَّهُ خَيْرًا). Dibedakan dengan ucapan terima kasih karena kalimat syukur termasuk do\'a.'
+          }
+        ],
+        pokokKeilmuan: [
+          {
+            sub: 'Aqidah & Surga Neraka',
+            poin: 'Ke-Esa-an Allah; Rukun Iman, Rukun Islam & Ihsan; amal sholih berpahala masuk surga & amal jelek berdosa masuk neraka; 6 Alam Kehidupan Manusia (alam ruh, alam rahim, alam dunia, alam kubur, alam qiyamat, dan alam akhirat); tujuan & kemurnian ibadah.'
+          },
+          {
+            sub: 'Hukum & Ibadah',
+            poin: 'Pengertian Qur\'an Hadits Jamaah; wajibnya taat & haramnya maksiat; hukum halal-haram; thoharoh (suci-najis & istinja\'); sholat fardhu & sholat sunah rowatib; puasa Romadlon (kefadlolan, hal yang diperbolehkan & membatalkan puasa); serta batas-batas mahrom.'
+          },
+          {
+            sub: 'Faham Jamaah',
+            poin: 'Lima Bab, Empat Tali Keimanan, Tri Sukses Generasi Penerus, Enam Thobiat Luhur Jamaah, serta pengertian dan wajibnya berjamaah.'
+          }
+        ],
+        bacaanPraktekIbadah: {
+          bacaanSholat: 'Do\'a Iftitah, Ruku\', I\'tidal, Sujud, Duduk antara 2 sujud, Tasyahud, dan Sholawat.',
+          praktekTerpadu: 'Praktek wudhu beserta doa sebelum & sesudahnya; praktek menjaga kesucian (suci-najis); tata cara buang air kecil & besar serta mensucikan najis (istinja\'); praktek sholat fardhu (12 tahapan) beserta bacaan & doanya; sholat berjamaah; dzikir setiap selesai sholat; sholat sunah rowatib; latihan puasa Romadlon; menjaga pergaulan antara laki-laki & perempuan bukan mahrom; serta mempraktikkan doa-doa harian.'
+        }
+      },
+
+      akhlaq: [
+        {
+          no: '1',
+          ranah: 'Pribadi',
+          poin: [
+            'a. Tertanam sifat jujur, amanah, mujhid-muzhid (Enam Thobiat Luhur).',
+            'b. Tertanam sifat-sifat yang baik: Bersyukur, ta\'dhim, ta\'at, sabar, dermawan/berbagi, pemaaf, kasih sayang, semangat, tawadu\'/rendah hati, husnudhon, ramah-tamah, sopan-santun, disiplin, tertib, bersih dan rapih.',
+            'c. Tertanam menghindari akhlaq tercela: Amarah, dendam, iri hati, bohong, kikir/pelit, serakah/rakus, menghina, mencela, meremehkan, bertengkar, menganiaya, mencuri, menggasap, merusak, jahil/usil, mengumpat/misuh, membully.'
+          ]
+        },
+        {
+          no: '2',
+          ranah: 'Keluarga',
+          poin: [
+            'a. Tertanam kewajiban berbuat baik kepada orangtua: Ta\'at, ta\'dhim, bersyukur, tawadu\'/rendah hati, perhatian/gemati.',
+            'b. Tertanam kewajiban berbuat baik kepada saudara dan kerabat: Hormat terhadap yang lebih tua, sayang terhadap yang lebih muda, dan pemaaf, perhatian/gemati.'
+          ]
+        },
+        {
+          no: '3',
+          ranah: 'Ulil Amri, guru dan muballigh-muballighot',
+          poin: [
+            'Tertanam kewajiban berbuat baik kepada Ulil Amri, guru dan muballigh-muballighot: Bersyukur, ta\'dhim/hormat, ta\'at, tawadu\'/rendah hati, husnudhon.'
+          ]
+        },
+        {
+          no: '4',
+          ranah: 'Masyarakat',
+          poin: [
+            'a. Tertanam kewajiban berbuat baik kepada teman: Rukun, kompak, kerjasama yang baik (enam thobiat luhur), dermawan/berbagi, tawadu\'/rendah hati, pemaaf, kasih sayang, husnudhon.',
+            'b. Tertanam kewajiban berbuat baik kepada tetangga: Rukun, kompak, kerjasama yang baik (enam thobiat luhur), hormat, dermawan/berbagi, tawadu\'/rendah hati, pemaaf, senang, sabar, kasih sayang, husnudhon.',
+            'c. Tertanam kewajiban berbuat baik kepada tamu: Hormat, memulyakan, tawadu\'/rendah hati, dermawan/berbagi.'
+          ]
+        },
+        {
+          no: '5',
+          ranah: 'Lingkungan dan alam sekitar',
+          poin: [
+            'Tertanam cinta alam sekitar.'
+          ]
+        }
+      ],
+
+      adab18: [
+        {
+          no: 1,
+          judul: 'Tatakrama ta\'dhim dan berbuat baik kepada kedua orangtua',
+          butir: [
+            'a. Mengucapkan salam/menyapa dan menjawab salam',
+            'b. Berjabat tangan sambil menundukkan kepala dan mencium tangannya',
+            'c. Apabila dipanggil segera menjawab dan mendatangi',
+            'd. Bertutur kata dengan bahasa yang halus dan sopan (boso) dengan nada suara lebih rendah',
+            'e. Mendengarkan dan memperhatikan ketika dinasehati',
+            'f. Ketika berjalan di depan orangtua sedikit membungkuk',
+            'g. Berpamitan ketika akan bepergian',
+            'h. Bersyukur atas pemberian orangtua',
+            'i. Tidak meminta sesuatu dengan sak dek sak nyet (seketika harus dikabulkan)',
+            'j. Selalu mendoakan kedua orangtua',
+            'k. Mendahulukan kedua orangtua pada saat makan dan minum',
+            'l. Mengerjakan / mentaati perintah-perintah orangtua',
+            'm. Membantu meringankan kesibukan / pekerjaan orangtua (pekerjaan rumah / bukan mencari ma\'isyah)',
+            'n. Menjaga nama baik dan kehormatan kedua orangtua',
+            'o. Mendahulukan kepentingan kedua orangtua daripada diri sendiri',
+            'p. Tidak memaksakan kehendak (meminta sesuatu tanpa mempertimbangkan kemampuan kedua orangtua)',
+            'q. Segera meminta maaf apabila melakukan kesalahan/menyakiti hati kedua orangtua',
+            'r. Selalu meminta keridlo\'an dan meminta doa yang baik dari kedua orangtua',
+            's. Berusaha mewujudkan harapan dan cita-cita orangtua'
+          ]
+        },
+        {
+          no: 2,
+          judul: 'Tatakrama menghormati saudara yang lebih tua dan menyayangi saudara yang lebih muda',
+          butir: [
+            'a. Mengucapkan salam/menyapa dan menjawab salam',
+            'b. Berjabat tangan sambil agak menundukkan kepala kepada yang lebih tua',
+            'c. Segera menjawab dan mendatangi bila dipanggil',
+            'd. Bertutur kata dengan bahasa yang baik dan sopan',
+            'e. Saling mensyukuri',
+            'f. Saling mendoakan'
+          ]
+        },
+        {
+          no: 3,
+          judul: 'Tatakrama menghormati guru dan muballigh-muballighot',
+          butir: [
+            'a. Mengucapkan salam/menyapa dan menjawab salam',
+            'b. Berjabat tangan dengan cium tangan (perempuan dengan muballighot dan laki-laki terhadap muballigh)',
+            'c. Bertutur kata dengan bahasa yang halus dan sopan (boso)',
+            'd. Mendengarkan dan memperhatikan ketika menerima materi pelajaran dari guru dan muballigh-muballighot',
+            'e. Bila melintas di depannya mengucapkan permisi sambil agak membungkukkan badan',
+            'f. Bersyukur dan mendoakan kepada guru dan muballigh-muballighot',
+            'g. Bila menunjukkan sesuatu menggunakan ibu jari tangan kanan'
+          ]
+        },
+        {
+          no: 4,
+          judul: 'Tatakrama bergaul dengan teman',
+          butir: [
+            'a. Mengucapkan salam/menyapa',
+            'b. Berjabat tangan dengan lembut ketika bertemu',
+            'c. Bertutur kata dengan bahasa yang baik dan sopan (papan, empan, adepan)',
+            'd. Menghindari gurauan yang berlebihan dan gojlog-gojlokan',
+            'e. Tidak memanggil dengan panggilan/julukan yang tidak baik/dibenci',
+            'f. Tidak mengejek, menghina, menggunjing, maupun mengadu domba',
+            'g. Menghargai pendapat dan karya teman'
+          ]
+        },
+        {
+          no: 5,
+          judul: 'Tatakrama ketika di masjid',
+          butir: [
+            'a. Membaca doa ketika masuk dan keluar masjid',
+            'b. Sholat sunah tahiyatul masjid',
+            'c. Duduk dengan tenang, tidak bergurau, dan tidak ramai dalam masjid'
+          ]
+        },
+        {
+          no: 6,
+          judul: 'Tatakrama ketika di tempat pengajian dan sekolah',
+          butir: [
+            'a. Menjaga kebersihan dan kerapihan kelas',
+            'b. Mengikuti proses pembelajaran dengan tenang dan penuh perhatian'
+          ]
+        },
+        {
+          no: 7,
+          judul: 'Tatakrama terhadap lingkungan dan alam sekitar',
+          butir: [
+            'a. Membuang sampah pada tempatnya',
+            'b. Tidak merusak tanaman',
+            'c. Tidak menyakiti hewan piaraan'
+          ]
+        },
+        {
+          no: 8,
+          judul: 'Tatakrama terhadap Ulil Amri',
+          butir: [
+            'a. Mengucapkan salam atau menyapa dengan ramah bila berpapasan',
+            'b. Berjabat tangan sambil menundukkan kepala dan mencium tangannya',
+            'c. Bertutur kata dengan bahasa yang halus, baik dan sopan',
+            'd. Bila melintas di depannya mengucapkan permisi sambil agak membungkukkan badan',
+            'e. Bila menunjukkan sesuatu menggunakan ibu jari tangan kanan',
+            'f. Mendengarkan nasehat dan mengerjakan/mentaati perintah-perintahnya',
+            'g. Bersyukur dan mendoakan kepada Ulil Amri'
+          ]
+        },
+        {
+          no: 9,
+          judul: 'Tatakrama bertamu / diajak bertamu dan kedatangan tamu',
+          butir: [
+            'a. Ketika bertamu/diajak bertamu berpakaian rapi, pantas dan sopan, mengetuk pintu dengan mengucapkan salam, berjabat tangan dengan tuan rumah, duduk dengan sopan, tenang dan tidak lari-lari, makan dan minum setelah dipersilahkan tuan rumah, dan tidak merusak barang-barang milik tuan rumah',
+            'b. Menyambut tamu dengan wajah ceria dan berjabat tangan sambil cium tangan, menghindari ikut nimbrung dalam pembicaraan tamu dan menjaga kenyamanan tamu'
+          ]
+        },
+        {
+          no: 10,
+          judul: 'Tatakrama berpakaian',
+          butir: [
+            'a. Memperkenalkan pakaian rapi, sopan dan benar menurut syariat Islam',
+            'b. Memperkenalkan ciri-ciri pakaian laki-laki dan perempuan'
+          ]
+        },
+        {
+          no: 11,
+          judul: 'Tatakrama tidur',
+          butir: [
+            'a. Membaca doa sebelum tidur dan setelah bangun tidur',
+            'b. Tidur dengan terlentang atau miring ke kanan, dan tidak tengkurap',
+            'c. Tidak tidur di tempat yang membahayakan',
+            'd. Merapikan kembali tempat tidur setelah bangun tidur'
+          ]
+        },
+        {
+          no: 12,
+          judul: 'Tatakrama ketika menguap',
+          butir: [
+            'a. Menutup mulut',
+            'b. Tidak bersuara dan tidak mengeluarkan kata-kata yang dibuat-buat'
+          ]
+        },
+        {
+          no: 13,
+          judul: 'Tatakrama ketika bersin',
+          butir: [
+            'a. Menutup mulut dan tidak mempermainkan suara',
+            'b. Berdoa setelah bersin dan menjawab doanya orang bersin'
+          ]
+        },
+        {
+          no: 14,
+          judul: 'Tatakrama terhadap kerabat',
+          butir: [
+            'a. Mengenal silsilah dan menyambung kerabat',
+            'b. Berjabat tangan dengan lembut ketika bertemu',
+            'c. Bertutur kata dengan bahasa yang halus, baik dan sopan (boso)',
+            'd. Mengutamakan perhatian terhadap kerabat',
+            'e. Akrab dan menyaudara (nyemanak)',
+            'f. Saling titip salam dan mendoakan'
+          ]
+        },
+        {
+          no: 15,
+          judul: 'Tatakrama terhadap tetangga',
+          butir: [
+            'a. Mengucapkan salam/menyapa dan mengucapkannya dengan ramah',
+            'b. Bertutur kata dengan bahasa yang halus, baik dan sopan (papan, empan, adepan)',
+            'c. Tidak mengejek, menghina, menggunjing, maupun mengadu domba',
+            'd. Bila meminjam sesuatu segera mengembalikan dengan baik',
+            'e. Tidak kikir/pelit',
+            'f. Menghargai pemberian tetangga walaupun tidak menyukainya',
+            'g. Tidak mengganggu tetangga yang sedang istirahat',
+            'h. Menjenguknya apabila sakit'
+          ]
+        },
+        {
+          no: 16,
+          judul: 'Tatakrama bersepeda',
+          butir: [
+            'a. Mengucapkan salam atau menyapa/permisi ketika berpapasan dengan orang yang berjalan kaki/sedang duduk',
+            'b. Tidak ngebut / ugal-ugalan di jalan, terutama ketika melewati gang',
+            'c. Tidak berboncengan tiga anak atau lebih'
+          ]
+        },
+        {
+          no: 17,
+          judul: 'Tatakrama ketika makan bersama',
+          butir: [
+            'a. Duduk dengan sopan',
+            'b. Mendahulukan yang lebih tua',
+            'c. Tidak mengambil makanan yang dihidangkan dengan sendok yang sudah digunakan untuk makan',
+            'd. Makan dengan tangan kanan',
+            'e. Mengambil makanan secukupnya dan dihabiskan',
+            'f. Dalam hal makan prasmanan hendaknya mengambil makanan sewajarnya, serta segera pergi untuk memberi kesempatan kepada yang lain bisa mengambil makanan dengan mudah',
+            'g. Mengambil makanan yang terdekat',
+            'h. Mengambil makanan di wadah dari yang paling tepi',
+            'i. Tidak berbicara ketika mulut masih penuh makanan',
+            'j. Mengunyah makanan dengan bibir tertutup, sehingga kunyahannya tidak bersuara',
+            'k. Tidak memasukkan makanan ke mulut sebelum makanan di dalam mulut habis',
+            'l. Tidak terdengar suara sendok, garpu dan piring',
+            'm. Tidak melakukan hal-hal yang tabu (kentut, bersendawa dan berdahak)',
+            'n. Ketika membersihkan makanan di gigi menutup mulut dengan tangan dan tidak membuangnya di hadapan orang lain'
+          ]
+        },
+        {
+          no: 18,
+          judul: 'Tatakrama mencari ilmu',
+          butir: [
+            'a. Memakai pakaian yang rapi, bersih dan suci',
+            'b. Membawa kitab yang dimanqulkan',
+            'c. Menata dan merapikan tempat mengaji',
+            'd. Datang lebih awal sebelum pengajian dimulai',
+            'e. Duduk dengan rapi dan meletakkan kitab di meja belajar/dampar',
+            'f. Selama guru mengajar memperhatikan dan menghadap ke arah guru/tidak nyingkur',
+            'g. Tidak bergurau, ngobrol, makan dan minum serta tidak saur manuk',
+            'h. Selesai pengajian mengembalikan meja/dampar dan merapikan tempat mengaji',
+            'i. Bersyukur dan bersalaman dengan guru dan muballigh-muballighot (perempuan dengan muballighot dan laki-laki dengan muballigh)'
+          ]
+        }
+      ],
+
+      kemandirian: [
+        {
+          kode: 'A',
+          judul: 'Kemandirian Pribadi',
+          butir: [
+            '1. Makan-minum secara mandiri',
+            '2. Mandi secara mandiri',
+            '3. Buang air (kencing dan berak) secara mandiri',
+            '4. Memakai pakaian dengan benar',
+            '5. Menempatkan pakaian bersih dan kotor pada tempatnya (tidak berserakan)',
+            '6. Menyiapkan peralatan sekolah dan mengaji secara mandiri',
+            '7. Berlatih mengatur waktu ibadah, mengaji, belajar, bermain dan istirahat',
+            '8. Mencuci peralatan makannya sendiri (piring, sendok, gelas, dll)',
+            '9. Melipat dan menata pakaian dalam almari'
+          ]
+        },
+        {
+          kode: 'B',
+          judul: 'Kemandirian Dalam Keluarga',
+          butir: [
+            '1. Meletakkan peralatan makan yang habis dipakai di tempatnya',
+            '2. Meletakkan pakaian kotor di tempatnya',
+            '3. Membuang sampah pada tempatnya',
+            '4. Merapikan tempat tidur',
+            '5. Menata buku/kitab, peralatan belajar dan tempat belajar',
+            '6. Menyapu lantai rumah'
+          ]
+        },
+        {
+          kode: 'C',
+          judul: 'Kemandirian Dalam Lingkungan Jamaah dan Sekolah',
+          butir: [
+            '1. Bisa menata dan merapikan perlengkapan pengajian dan sekolah',
+            '2. Tidak ditunggui orangtua ketika di pengajian dan sekolah',
+            '3. Tanggap dengan hal-hal yang isrof dan mubadzir (memadamkan lampu, mematikan kipas angin/AC, menutup kran air ketika sudah tidak diperlukan)'
+          ]
+        }
+      ],
+
+      catatanPelaksanaan:
+        'Catatan Pelaksanaan Kelas Bawah: Materi Keilmuan & Kefahaman Agama, Akhlaqul Karimah, Adab/Tatakrama Keseharian (18 aspek), Pembiasaan Kemandirian, serta Praktek Ibadah (wudhu, adab buang air & mensucikan najis, sholat fardhu 12 tahapan, dzikir setelah sholat, sholat rowatib, dan menjaga pergaulan dengan bukan mahrom) disampaikan secara bertahap pada sesi Klasikal Gabungan hari Jum\'at menggunakan buku panduan praktek ibadah & pegangan guru PPG Daerah Garut Selatan.'
+    };
+
+    // =========================================================================
+    // 2. APPLICATION STATE & PERSISTENCE (LOCALSTORAGE)
+    // =========================================================================
+    const STORAGE_KEY = 'cabe_rawit_ppg_garut_selatan_v1';
+    let appState = {
+      activeTab: 'beranda',
+      silabusSubtab: 'asmaul',
+      keilmuanSubtab: 'ibadah',
+      jenjang: 'ALL',
+      searchQuery: '',
+      asmaulTahap: 'ALL',
+      doaKel: 'ALL',
+      bookmarks: [],
+      completed: [],
+      darkMode: false
+    };
+
+    let deferredInstallPrompt = null;
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          appState = { ...appState, ...parsed };
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          appState.darkMode = true;
+        }
+      } catch (e) {
+        console.warn('Gagal memuat state lokal:', e);
+      }
+      applyDarkMode();
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          bookmarks: appState.bookmarks,
+          completed: appState.completed,
+          darkMode: appState.darkMode
+        }));
+        updateProgresBadge();
+      } catch (e) {
+        console.warn('Gagal menyimpan state lokal:', e);
+      }
+    }
+
+    function toggleDarkMode() {
+      appState.darkMode = !appState.darkMode;
+      applyDarkMode();
+      saveState();
+    }
+
+    function applyDarkMode() {
+      const html = document.documentElement;
+      const sun = document.getElementById('sunIcon');
+      const moon = document.getElementById('moonIcon');
+      if (appState.darkMode) {
+        html.classList.add('dark');
+        sun?.classList.remove('hidden');
+        moon?.classList.add('hidden');
+      } else {
+        html.classList.remove('dark');
+        sun?.classList.add('hidden');
+        moon?.classList.remove('hidden');
+      }
+    }
+
+    // =========================================================================
+    // 3. TOAST & CONFIRMATION HELPERS (NO ALERT/CONFIRM)
+    // =========================================================================
+    function showToast(msg, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      if (!container) return;
+      const el = document.createElement('div');
+      const colors = type === 'success'
+        ? 'bg-emerald-800 text-white border-amber-400'
+        : type === 'warn'
+        ? 'bg-amber-600 text-white border-amber-200'
+        : 'bg-slate-900 text-white border-emerald-500';
+      el.className = `pointer-events-auto border-l-4 ${colors} px-4 py-3 rounded-2xl shadow-xl text-xs sm:text-sm font-semibold flex items-center justify-between gap-3 transition-all duration-300`;
+      el.innerHTML = `<span>${escapeHtml(msg)}</span><button class="text-white/80 hover:text-white font-bold cursor-pointer">✕</button>`;
+      el.querySelector('button').onclick = () => el.remove();
+      container.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        setTimeout(() => el.remove(), 250);
+      }, 3200);
+    }
+
+    function openConfirmDialog(title, message, onOk) {
+      const modal = document.getElementById('confirmModal');
+      document.getElementById('confirmTitle').textContent = title;
+      document.getElementById('confirmMessage').textContent = message;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      const cancelBtn = document.getElementById('confirmCancelBtn');
+      const okBtn = document.getElementById('confirmOkBtn');
+
+      const cleanup = () => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        cancelBtn.onclick = null;
+        okBtn.onclick = null;
+      };
+
+      cancelBtn.onclick = cleanup;
+      okBtn.onclick = () => {
+        cleanup();
+        onOk();
+      };
+    }
+
+    // =========================================================================
+    // 4. PWA MANIFEST, SERVICE WORKER & INSTALL HANDLERS
+    // =========================================================================
+    function getManifestObject() {
+      return {
+        name: 'Buku Pegangan Cabe Rawit - PPG Garut Selatan',
+        short_name: 'Cabe Rawit PPG',
+        description: 'Kurikulum Pembelajaran Kelas Bawah (Tingkat PAUD & SD Kelas 1, 2, 3) PPG Daerah Garut Selatan — Edisi Tersinkronisasi Lengkap',
+        start_url: './',
+        scope: './',
+        display: 'standalone',
+        orientation: 'portrait-primary',
+        background_color: '#064e3b',
+        theme_color: '#047857',
+        lang: 'id',
+        categories: ['education', 'books', 'lifestyle'],
+        icons: [
+          {
+            src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='42' fill='%23064e3b'/%3E%3Ccircle cx='96' cy='96' r='66' fill='none' stroke='%23fbbf24' stroke-width='8'/%3E%3Ctext x='96' y='88' text-anchor='middle' fill='%23fbbf24' font-family='Arial,sans-serif' font-size='30' font-weight='bold'%3EPPG GSL%3C/text%3E%3Ctext x='96' y='124' text-anchor='middle' fill='%23ffffff' font-family='Arial,sans-serif' font-size='20' font-weight='bold'%3ECABE RAWIT%3C/text%3E%3C/svg%3E",
+            sizes: '192x192',
+            type: 'image/svg+xml',
+            purpose: 'any maskable'
+          },
+          {
+            src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='110' fill='%23064e3b'/%3E%3Ccircle cx='256' cy='256' r='176' fill='none' stroke='%23fbbf24' stroke-width='18'/%3E%3Ctext x='256' y='235' text-anchor='middle' fill='%23fbbf24' font-family='Arial,sans-serif' font-size='76' font-weight='bold'%3EPPG GSL%3C/text%3E%3Ctext x='256' y='325' text-anchor='middle' fill='%23ffffff' font-family='Arial,sans-serif' font-size='52' font-weight='bold'%3ECABE RAWIT%3C/text%3E%3C/svg%3E",
+            sizes: '512x512',
+            type: 'image/svg+xml',
+            purpose: 'any maskable'
+          }
+        ]
+      };
+    }
+
+    function getServiceWorkerCode() {
+      return `
+const CACHE_NAME = 'cabe-rawit-ppg-garut-selatan-v1';
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(['./']))
+  );
+  self.skipWaiting();
+});
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+    )
+  );
+  self.clients.claim();
+});
+self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+  event.respondWith(
+    caches.match(event.request).then((cached) => {
+      if (cached) return cached;
+      return fetch(event.request)
+        .then((response) => {
+          if (!response || response.status !== 200 || response.type !== 'basic') return response;
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          return response;
+        })
+        .catch(() => caches.match('./'));
+    })
+  );
+});
+`.trim();
+    }
+
+    function setupPWA() {
+      try {
+        const manifestBlob = new Blob([JSON.stringify(getManifestObject(), null, 2)], { type: 'application/json' });
+        const manifestUrl = URL.createObjectURL(manifestBlob);
+        const link = document.createElement('link');
+        link.rel = 'manifest';
+        link.href = manifestUrl;
+        document.head.appendChild(link);
+      } catch (e) {
+        console.warn('Manifest blob gagal dipasang:', e);
+      }
+
+      if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+        try {
+          const swBlob = new Blob([getServiceWorkerCode()], { type: 'application/javascript' });
+          const swUrl = URL.createObjectURL(swBlob);
+          navigator.serviceWorker.register(swUrl).catch(() => {});
+        } catch (e) {
+          // Fallback silently in sandboxed/file previews
+        }
+      }
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        showToast('Aplikasi siap diinstal ke HP! Ketuk tombol "Install HP".', 'success');
+      });
+
+      window.addEventListener('appinstalled', () => {
+        deferredInstallPrompt = null;
+        showToast('Alhamdulillah, aplikasi Cabe Rawit PPG berhasil diinstal ke HP!', 'success');
+      });
+    }
+
+    async function handleInstallClick() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        const { outcome } = await deferredInstallPrompt.userChoice;
+        if (outcome === 'accepted') {
+          showToast('Proses instalasi aplikasi ke HP dimulai...', 'success');
+        } else {
+          showToast('Instalasi dibatalkan. Anda bisa membukanya lewat panduan.', 'info');
+        }
+        deferredInstallPrompt = null;
+      } else {
+        openInstallGuideModal();
+      }
+    }
+
+    function openInstallGuideModal() {
+      const modal = document.getElementById('installGuideModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeInstallGuideModal() {
+      const modal = document.getElementById('installGuideModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function downloadFile(filename, content, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showToast(`File ${filename} berhasil diunduh.`, 'success');
+    }
+
+    function downloadManifestJSON() {
+      downloadFile('manifest.json', JSON.stringify(getManifestObject(), null, 2), 'application/json');
+    }
+
+    function downloadServiceWorkerJS() {
+      downloadFile('sw.js', getServiceWorkerCode(), 'application/javascript');
+    }
+
+    // =========================================================================
+    // 5. NAVIGATION, SEARCH & JENJANG FILTER LOGIC
+    // =========================================================================
+    function switchTab(tabName) {
+      appState.activeTab = tabName;
+      document.querySelectorAll('.tab-section').forEach((sec) => {
+        sec.classList.toggle('hidden', sec.id !== `tab-${tabName}`);
+      });
+
+      document.querySelectorAll('.nav-tab').forEach((btn) => {
+        const active = btn.dataset.tab === tabName;
+        btn.classList.toggle('border-amber-400', active);
+        btn.classList.toggle('text-amber-300', active);
+        btn.classList.toggle('border-transparent', !active);
+        btn.classList.toggle('text-emerald-100/80', !active);
+      });
+
+      document.querySelectorAll('.mob-tab').forEach((btn) => {
+        const active = btn.dataset.tab === tabName;
+        btn.classList.toggle('text-emerald-700', active && !appState.darkMode);
+        btn.classList.toggle('dark:text-amber-300', active);
+        btn.classList.toggle('bg-emerald-50', active && !appState.darkMode);
+        btn.classList.toggle('dark:bg-slate-800', active);
+        btn.classList.toggle('text-slate-500', !active);
+      });
+
+      if (tabName === 'progres') {
+        renderProgresTab();
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchSilabusSubtab(sub) {
+      appState.silabusSubtab = sub;
+      document.querySelectorAll('.silabus-subtab').forEach((btn) => {
+        const active = btn.dataset.subtab === sub;
+        btn.className = `silabus-subtab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+          active
+            ? 'bg-emerald-700 text-white shadow-sm'
+            : 'bg-emerald-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-emerald-100 dark:hover:bg-slate-700'
+        }`;
+      });
+      document.querySelectorAll('.silabus-panel').forEach((panel) => {
+        panel.classList.toggle('hidden', panel.id !== `subtab-${sub}`);
+      });
+    }
+
+    function switchKeilmuanSubtab(sub) {
+      appState.keilmuanSubtab = sub;
+      document.querySelectorAll('.keilmuan-subtab').forEach((btn) => {
+        const active = btn.dataset.ktab === sub;
+        btn.className = `keilmuan-subtab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+          active
+            ? 'bg-emerald-700 text-white shadow-sm'
+            : 'bg-emerald-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-emerald-100 dark:hover:bg-slate-700'
+        }`;
+      });
+      document.querySelectorAll('.keilmuan-panel').forEach((panel) => {
+        panel.classList.toggle('hidden', panel.id !== `ktab-${sub}`);
+      });
+    }
+
+    function setJenjangFilter(jenjang) {
+      appState.jenjang = jenjang;
+      document.querySelectorAll('.jenjang-pill').forEach((btn) => {
+        const active = btn.dataset.jenjang === jenjang;
+        btn.className = `jenjang-pill px-3 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0 ${
+          active
+            ? 'font-bold bg-amber-400 text-emerald-950 shadow-sm'
+            : 'font-semibold bg-white/10 hover:bg-white/20 text-white'
+        }`;
+      });
+
+      if (jenjang === 'PAUD') {
+        appState.asmaulTahap = '1';
+        appState.doaKel = 'A';
+      } else if (jenjang === 'KLS1') {
+        appState.asmaulTahap = '2';
+        appState.doaKel = 'B';
+      } else if (jenjang === 'KLS2') {
+        appState.asmaulTahap = '3';
+        appState.doaKel = 'C';
+      } else if (jenjang === 'KLS3') {
+        appState.asmaulTahap = '4';
+        appState.doaKel = 'D';
+      } else {
+        appState.asmaulTahap = 'ALL';
+        appState.doaKel = 'ALL';
+      }
+
+      renderAsmaul();
+      renderDoa();
+      renderSuratKelompok();
+      if (appState.searchQuery.trim()) {
+        runInstantSearch();
+      }
+    }
+
+    function handleSearchChange(val) {
+      appState.searchQuery = val;
+      const clearBtn = document.getElementById('clearSearchBtn');
+      clearBtn.classList.toggle('hidden', !val.trim());
+      runInstantSearch();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('globalSearchInput');
+      input.value = '';
+      appState.searchQuery = '';
+      document.getElementById('clearSearchBtn').classList.add('hidden');
+      document.getElementById('searchResultsPanel').classList.add('hidden');
+    }
+
+    function runInstantSearch() {
+      const q = appState.searchQuery.trim().toLowerCase();
+      const panel = document.getElementById('searchResultsPanel');
+      const list = document.getElementById('searchResultsList');
+      const summary = document.getElementById('searchSummaryText');
+
+      if (!q) {
+        panel.classList.add('hidden');
+        return;
+      }
+
+      const results = [];
+
+      CURRICULUM_DATA.asmaul.forEach((a) => {
+        if (appState.jenjang !== 'ALL' && a.jenjang !== appState.jenjang) return;
+        if (`${a.n} ${a.tr} ${a.ar} tahap ${a.tahap} ${a.jenjang}`.toLowerCase().includes(q)) {
+          results.push({
+            cat: `Asmaul Husna #${a.n} (Tahap ${a.tahap} / ${a.jenjang})`,
+            title: a.tr,
+            arabic: a.ar,
+            body: ''
+          });
+        }
+      });
+
+      CURRICULUM_DATA.doa.forEach((d) => {
+        if (appState.jenjang !== 'ALL' && d.jenjang !== appState.jenjang) return;
+        if (`${d.n} ${d.judul} ${d.sumber} ${d.tr} ${d.ar} kelompok ${d.kel}`.toLowerCase().includes(q)) {
+          results.push({
+            cat: `Do'a Harian #${d.n} (Kel. ${d.kel} • ${d.sumber})`,
+            title: d.judul,
+            arabic: d.ar,
+            body: d.tr
+          });
+        }
+      });
+
+      CURRICULUM_DATA.suratKelompok.forEach((sg) => {
+        if (appState.jenjang !== 'ALL' && sg.jenjang !== appState.jenjang) return;
+        sg.items.forEach((s) => {
+          if (`${s.nama} ${s.ayat} ${s.tipe} ${sg.kel}`.toLowerCase().includes(q)) {
+            results.push({
+              cat: `Surat Pendek • ${sg.kel}`,
+              title: `${s.n}. ${s.nama} (${s.ayat})`,
+              arabic: '',
+              body: `Status: ${s.tipe}`
+            });
+          }
+        });
+      });
+
+      CURRICULUM_DATA.dalil.forEach((grp) => {
+        grp.items.forEach((dl) => {
+          if (`${grp.tema} ${dl.kode} ${dl.tr} ${dl.arti} ${dl.ar}`.toLowerCase().includes(q)) {
+            results.push({
+              cat: `${grp.tema} (${dl.kode})`,
+              title: dl.tr,
+              arabic: dl.ar,
+              body: dl.arti
+            });
+          }
+        });
+      });
+
+      CURRICULUM_DATA.adab18.forEach((ad) => {
+        const joined = `${ad.no} ${ad.judul} ${ad.butir.join(' ')}`.toLowerCase();
+        if (joined.includes(q)) {
+          results.push({
+            cat: `Adab / Tatakrama Aspek #${ad.no}`,
+            title: ad.judul,
+            arabic: '',
+            body: ad.butir.join(' • ')
+          });
+        }
+      });
+
+      CURRICULUM_DATA.kemandirian.forEach((km) => {
+        const joined = `${km.kode} ${km.judul} ${km.butir.join(' ')}`.toLowerCase();
+        if (joined.includes(q)) {
+          results.push({
+            cat: `Kemandirian Bagian ${km.kode}`,
+            title: km.judul,
+            arabic: '',
+            body: km.butir.join(' • ')
+          });
+        }
+      });
+
+      CURRICULUM_DATA.matriks.forEach((m) => {
+        const joined = `${m.bidang} ${m.deskripsi.join(' ')}`.toLowerCase();
+        if (joined.includes(q)) {
+          results.push({
+            cat: `Matriks Target #${m.no}`,
+            title: m.bidang,
+            arabic: '',
+            body: m.deskripsi.join(' ')
+          });
+        }
+      });
+
+      panel.classList.remove('hidden');
+      summary.textContent = `Ditemukan ${results.length} materi untuk "${appState.searchQuery}"`;
+
+      if (results.length === 0) {
+        list.innerHTML = `<p class="text-sm text-slate-500 dark:text-slate-400 py-4 text-center">Tidak ada materi yang cocok dengan kata kunci tersebut.</p>`;
+        return;
+      }
+
+      list.innerHTML = results.slice(0, 40).map((r) => `
+        <div class="p-3.5 rounded-2xl bg-emerald-50/60 dark:bg-slate-800/70 border border-emerald-200/70 dark:border-slate-700 space-y-1">
+          <div class="text-[11px] font-bold text-emerald-700 dark:text-amber-300">${escapeHtml(r.cat)}</div>
+          <div class="text-sm font-bold text-slate-900 dark:text-white">${escapeHtml(r.title)}</div>
+          ${r.arabic ? `<div class="arabic-text text-lg font-bold text-emerald-950 dark:text-amber-200">${escapeHtml(r.arabic)}</div>` : ''}
+          ${r.body ? `<div class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">${escapeHtml(r.body)}</div>` : ''}
+        </div>
+      `).join('');
+    }
+
+    // =========================================================================
+    // 6. BOOKMARK & COMPLETION HELPERS
+    // =========================================================================
+    function makeItemId(type, key) {
+      return `${type}::${key}`;
+    }
+
+    function isBookmarked(id) {
+      return appState.bookmarks.includes(id);
+    }
+
+    function isCompleted(id) {
+      return appState.completed.includes(id);
+    }
+
+    function toggleBookmark(id, label = '') {
+      const idx = appState.bookmarks.indexOf(id);
+      if (idx >= 0) {
+        appState.bookmarks.splice(idx, 1);
+        showToast('Dihapus dari bookmark.', 'info');
+      } else {
+        appState.bookmarks.push(id);
+        showToast(`Disimpan ke bookmark${label ? `: ${label}` : ''}.`, 'success');
+      }
+      saveState();
+      renderAllDynamicViews();
+    }
+
+    function toggleCompleted(id, label = '') {
+      const idx = appState.completed.indexOf(id);
+      if (idx >= 0) {
+        appState.completed.splice(idx, 1);
+        showToast('Status tuntas dibatalkan.', 'info');
+      } else {
+        appState.completed.push(id);
+        showToast(`Ditandai tuntas${label ? `: ${label}` : ''}!`, 'success');
+      }
+      saveState();
+      renderAllDynamicViews();
+    }
+
+    function updateProgresBadge() {
+      const badge = document.getElementById('progresBadge');
+      if (badge) {
+        badge.textContent = appState.bookmarks.length + appState.completed.length;
+      }
+    }
+
+    // =========================================================================
+    // 7. RENDERERS FOR ALL SECTIONS
+    // =========================================================================
+    function renderMatriks() {
+      const container = document.getElementById('matriksContainer');
+      container.innerHTML = CURRICULUM_DATA.matriks.map((m) => {
+        const id = makeItemId('matriks', m.no);
+        const done = isCompleted(id);
+        const fav = isBookmarked(id);
+        return `
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border ${done ? 'border-emerald-500/70' : 'border-emerald-200/70 dark:border-slate-800'} shadow-soft p-5 sm:p-6">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+              <div class="flex items-start gap-3">
+                <span class="w-8 h-8 rounded-xl bg-emerald-800 text-amber-300 font-extrabold text-sm flex items-center justify-center shrink-0 mt-0.5">${m.no}</span>
+                <div>
+                  <h3 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">${escapeHtml(m.bidang)}</h3>
+                  <div class="flex flex-wrap gap-1.5 mt-1">
+                    ${m.jenjang.map((j) => `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-200">${j}</span>`).join('')}
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="toggleCompleted('${id}', '${escapeJs(m.bidang)}')" class="px-2.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
+                  done
+                    ? 'bg-emerald-600 text-white'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-emerald-100'
+                }">
+                  ${done ? '✓ Tuntas' : 'Tandai Tuntas'}
+                </button>
+                <button onclick="toggleBookmark('${id}', '${escapeJs(m.bidang)}')" class="p-1.5 rounded-xl transition cursor-pointer ${
+                  fav ? 'bg-amber-400 text-emerald-950' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-amber-500'
+                }" title="Bookmark">
+                  ★
+                </button>
+              </div>
+            </div>
+            <div class="space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed pl-0 sm:pl-11">
+              ${m.deskripsi.map((line) => `<p>${formatBoldPrefix(line)}</p>`).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterAsmaulTahap(tahap) {
+      appState.asmaulTahap = tahap;
+      document.querySelectorAll('.atahap-btn').forEach((btn) => {
+        const active = btn.dataset.atahap === tahap;
+        btn.className = `atahap-btn px-3 py-1.5 rounded-xl text-xs transition cursor-pointer ${
+          active
+            ? 'font-bold bg-emerald-700 text-white'
+            : 'font-semibold bg-emerald-100 dark:bg-slate-800 text-emerald-900 dark:text-emerald-200'
+        }`;
+      });
+      renderAsmaul();
+    }
+
+    function renderAsmaul() {
+      const grid = document.getElementById('asmaulGrid');
+      const items = CURRICULUM_DATA.asmaul.filter((a) => {
+        if (appState.asmaulTahap !== 'ALL' && a.tahap !== appState.asmaulTahap) return false;
+        return true;
+      });
+
+      grid.innerHTML = items.map((a) => {
+        const id = makeItemId('asmaul', a.n);
+        const done = isCompleted(id);
+        const fav = isBookmarked(id);
+        return `
+          <div class="rounded-2xl border ${done ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/30' : 'border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/50'} p-3.5 flex flex-col justify-between gap-2 transition hover:shadow-md">
+            <div class="flex items-center justify-between gap-1">
+              <span class="px-2 py-0.5 rounded-lg bg-emerald-900 text-amber-300 text-[11px] font-extrabold">#${a.n} • ${a.jenjang}</span>
+              <div class="flex items-center gap-1">
+                <button onclick="toggleCompleted('${id}', '${escapeJs(a.tr)}')" class="px-2 py-0.5 rounded-lg text-[10px] font-bold cursor-pointer ${
+                  done ? 'bg-emerald-600 text-white' : 'bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-200'
+                }">
+                  ${done ? '✓' : '○'}
+                </button>
+                <button onclick="toggleBookmark('${id}', '${escapeJs(a.tr)}')" class="text-sm leading-none cursor-pointer ${fav ? 'text-amber-500' : 'text-slate-400 hover:text-amber-400'}">
+                  ★
+                </button>
+              </div>
+            </div>
+            <div class="arabic-text text-xl sm:text-2xl font-bold text-slate-900 dark:text-amber-200 text-center py-1">
+              ${escapeHtml(a.ar)}
+            </div>
+            <div class="text-xs sm:text-sm font-bold text-emerald-900 dark:text-emerald-200 text-center">
+              ${escapeHtml(a.tr)}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterDoaKel(kel) {
+      appState.doaKel = kel;
+      document.querySelectorAll('.dkel-btn').forEach((btn) => {
+        const active = btn.dataset.dkel === kel;
+        btn.className = `dkel-btn px-3 py-1 rounded-xl text-xs transition cursor-pointer ${
+          active
+            ? 'font-bold bg-emerald-700 text-white'
+            : 'font-semibold bg-emerald-100 dark:bg-slate-800 text-emerald-900 dark:text-emerald-200'
+        }`;
+      });
+      renderDoa();
+    }
+
+    function renderDoa() {
+      const list = document.getElementById('doaList');
+      const items = CURRICULUM_DATA.doa.filter((d) => {
+        if (appState.doaKel !== 'ALL' && d.kel !== appState.doaKel) return false;
+        return true;
+      });
+
+      list.innerHTML = items.map((d) => {
+        const id = makeItemId('doa', d.n);
+        const done = isCompleted(id);
+        const fav = isBookmarked(id);
+        return `
+          <div class="rounded-2xl border ${done ? 'border-emerald-500/70 bg-emerald-50/40 dark:bg-emerald-950/25' : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/70'} p-4 sm:p-5 space-y-2.5 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-1 rounded-xl bg-emerald-800 text-amber-300 text-xs font-extrabold">Do'a #${d.n}</span>
+                <span class="px-2.5 py-1 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-200 text-xs font-bold">Kel. ${d.kel} (${d.jenjang})</span>
+                <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">${escapeHtml(d.sumber)}</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="toggleCompleted('${id}', '${escapeJs(d.judul)}')" class="px-2.5 py-1 rounded-xl text-xs font-bold cursor-pointer ${
+                  done ? 'bg-emerald-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
+                }">
+                  ${done ? '✓ Hafal/Tuntas' : 'Tandai Tuntas'}
+                </button>
+                <button onclick="toggleBookmark('${id}', '${escapeJs(d.judul)}')" class="px-2 py-1 rounded-xl text-xs font-bold cursor-pointer ${
+                  fav ? 'bg-amber-400 text-emerald-950' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
+                }">
+                  ★
+                </button>
+              </div>
+            </div>
+
+            <h4 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${escapeHtml(d.judul)}</h4>
+
+            <div class="p-3.5 rounded-2xl bg-emerald-50/80 dark:bg-slate-800/80 border border-emerald-200/60 dark:border-slate-700">
+              <p class="arabic-text text-xl sm:text-2xl font-bold text-slate-950 dark:text-amber-200">
+                ${escapeHtml(d.ar)}
+              </p>
+            </div>
+
+            <p class="text-xs sm:text-sm italic font-medium text-emerald-900 dark:text-emerald-200 leading-relaxed">
+              ${escapeHtml(d.tr)}
+            </p>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderSuratKelompok() {
+      const grid = document.getElementById('suratKelGrid');
+      grid.innerHTML = CURRICULUM_DATA.suratKelompok.map((sg) => `
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 p-4 flex flex-col justify-between space-y-3">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-xl text-xs font-extrabold ${sg.badgeColor} mb-3">
+              ${escapeHtml(sg.kel)}
+            </span>
+            <ul class="space-y-2">
+              ${sg.items.map((s) => {
+                const id = makeItemId('surat', s.n);
+                const done = isCompleted(id);
+                const isPengayaan = s.tipe === 'Pengayaan';
+                return `
+                  <li class="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-700/80 flex items-center justify-between gap-2">
+                    <div class="min-w-0">
+                      <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">
+                        ${s.n}. ${escapeHtml(s.nama)}
+                      </div>
+                      <div class="flex items-center gap-1.5 mt-0.5">
+                        <span class="text-[11px] text-slate-500 dark:text-slate-400">${escapeHtml(s.ayat)}</span>
+                        <span class="px-1.5 py-0.2 rounded text-[10px] font-bold ${
+                          isPengayaan
+                            ? 'bg-amber-100 dark:bg-amber-900/50 text-amber-900 dark:text-amber-200'
+                            : 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-200'
+                        }">${escapeHtml(s.tipe)}</span>
+                      </div>
+                    </div>
+                    <button onclick="toggleCompleted('${id}', '${escapeJs(s.nama)}')" class="px-2 py-1 rounded-lg text-[11px] font-bold shrink-0 cursor-pointer ${
+                      done ? 'bg-emerald-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+                    }">
+                      ${done ? '✓' : '○'}
+                    </button>
+                  </li>
+                `;
+              }).join('')}
+            </ul>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderDalil() {
+      const container = document.getElementById('dalilContainer');
+      container.innerHTML = CURRICULUM_DATA.dalil.map((grp) => `
+        <div class="rounded-2xl border border-emerald-200/80 dark:border-slate-800 bg-emerald-50/40 dark:bg-slate-800/40 p-4 sm:p-5 space-y-4">
+          <h4 class="text-base sm:text-lg font-extrabold text-emerald-900 dark:text-amber-300 border-b border-emerald-200 dark:border-slate-700 pb-2">
+            ${escapeHtml(grp.tema)}
+          </h4>
+          <div class="space-y-4">
+            ${grp.items.map((dl) => {
+              const id = makeItemId('dalil', dl.kode);
+              const done = isCompleted(id);
+              const fav = isBookmarked(id);
+              return `
+                <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-4 space-y-2.5">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg bg-emerald-800 text-amber-300 text-xs font-extrabold">Dalil ${dl.kode}</span>
+                    <div class="flex items-center gap-1.5">
+                      <button onclick="toggleCompleted('${id}', 'Dalil ${dl.kode}')" class="px-2.5 py-1 rounded-xl text-xs font-bold cursor-pointer ${
+                        done ? 'bg-emerald-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
+                      }">
+                        ${done ? '✓ Hafal' : 'Tandai Tuntas'}
+                      </button>
+                      <button onclick="toggleBookmark('${id}', 'Dalil ${dl.kode}')" class="px-2 py-1 rounded-xl text-xs font-bold cursor-pointer ${
+                        fav ? 'bg-amber-400 text-emerald-950' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
+                      }">
+                        ★
+                      </button>
+                    </div>
+                  </div>
+                  <p class="arabic-text text-xl sm:text-2xl font-bold text-slate-950 dark:text-amber-200 bg-emerald-50/70 dark:bg-slate-800/70 p-3.5 rounded-2xl">
+                    ${escapeHtml(dl.ar)}
+                  </p>
+                  <p class="text-xs sm:text-sm italic font-semibold text-emerald-800 dark:text-emerald-300">
+                    ${escapeHtml(dl.tr)}
+                  </p>
+                  <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                    <strong>Artinya:</strong> ${escapeHtml(dl.arti.replace(/^"Artinya:\s*/i, '').replace(/^Artinya:\s*/i, ''))}
+                  </p>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderKeilmuanPanels() {
+      const ibadahEl = document.getElementById('ktab-ibadah');
+      ibadahEl.innerHTML = `
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6 space-y-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-amber-400">Silabus Rinci • Poin 5 (Bagian 1)</span>
+          <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+            Tata Cara Berjabat Tangan, Uluk Salam &amp; Mengucapkan Syukur
+          </h3>
+          <div class="space-y-3">
+            ${CURRICULUM_DATA.keilmuanIbadah.tataCara.map((tc) => `
+              <div class="p-4 rounded-2xl bg-emerald-50/60 dark:bg-slate-800/60 border border-emerald-200/70 dark:border-slate-700 space-y-1.5">
+                <h4 class="font-extrabold text-sm sm:text-base text-emerald-950 dark:text-amber-300">${escapeHtml(tc.judul)}</h4>
+                <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHtml(tc.isi)}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6 space-y-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Pokok Keilmuan &amp; Kefahaman Agama (Alim-Faqih)</span>
+          <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+            Aqidah &amp; Surga Neraka, Hukum &amp; Ibadah, serta Faham Jamaah
+          </h3>
+          <div class="grid md:grid-cols-3 gap-4">
+            ${CURRICULUM_DATA.keilmuanIbadah.pokokKeilmuan.map((pk) => `
+              <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 space-y-2">
+                <h4 class="font-extrabold text-sm text-emerald-900 dark:text-amber-300">${escapeHtml(pk.sub)}</h4>
+                <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHtml(pk.poin)}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6 space-y-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-teal-700 dark:text-emerald-400">Bacaan Sholat &amp; Praktek Ibadah Terpadu</span>
+          <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+            Bacaan Sholat &amp; Praktek Ibadah Harian Kelas Bawah
+          </h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-2xl bg-amber-50/70 dark:bg-slate-800/70 border border-amber-200/70 dark:border-slate-700 space-y-1.5">
+              <h4 class="font-extrabold text-sm text-amber-950 dark:text-amber-300">Bacaan Sholat</h4>
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHtml(CURRICULUM_DATA.keilmuanIbadah.bacaanPraktekIbadah.bacaanSholat)}</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-emerald-50/70 dark:bg-slate-800/70 border border-emerald-200/70 dark:border-slate-700 space-y-1.5">
+              <h4 class="font-extrabold text-sm text-emerald-950 dark:text-emerald-300">Praktek Ibadah Terpadu</h4>
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHtml(CURRICULUM_DATA.keilmuanIbadah.bacaanPraktekIbadah.praktekTerpadu)}</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const akhlaqEl = document.getElementById('ktab-akhlaq');
+      akhlaqEl.innerHTML = `
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6 space-y-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-amber-400">Silabus Rinci • Poin 6.A</span>
+          <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">
+            Akhlaqul Karimah (Pribadi, Keluarga, Ulil Amri/Guru/Muballigh-Muballighot, Masyarakat &amp; Lingkungan)
+          </h3>
+          <div class="space-y-4">
+            ${CURRICULUM_DATA.akhlaq.map((ak) => `
+              <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
+                <h4 class="font-extrabold text-sm sm:text-base text-emerald-900 dark:text-amber-300">
+                  ${ak.no}. ${escapeHtml(ak.ranah)}
+                </h4>
+                <ul class="space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                  ${ak.poin.map((p) => `<li>${escapeHtml(p)}</li>`).join('')}
+                </ul>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      const adab18El = document.getElementById('ktab-adab18');
+      adab18El.innerHTML = `
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6 space-y-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-amber-400">Silabus Rinci • Poin 6.B (18 Aspek Lengkap)</span>
+          <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">
+            Adab / Tatakrama Keseharian (18 Aspek)
+          </h3>
+          <div class="space-y-3">
+            ${CURRICULUM_DATA.adab18.map((ad) => {
+              const id = makeItemId('adab18', ad.no);
+              const done = isCompleted(id);
+              const fav = isBookmarked(id);
+              return `
+                <details class="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 overflow-hidden" open>
+                  <summary class="list-none p-4 flex items-center justify-between gap-2 cursor-pointer select-none bg-emerald-50/70 dark:bg-slate-800">
+                    <div class="flex items-center gap-2.5">
+                      <span class="w-7 h-7 rounded-xl bg-emerald-800 text-amber-300 font-extrabold text-xs flex items-center justify-center shrink-0">${ad.no}</span>
+                      <span class="font-extrabold text-xs sm:text-sm text-slate-900 dark:text-white">${escapeHtml(ad.judul)}</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 shrink-0" onclick="event.stopPropagation()">
+                      <button onclick="toggleCompleted('${id}', 'Adab #${ad.no}')" class="px-2 py-1 rounded-lg text-[11px] font-bold cursor-pointer ${
+                        done ? 'bg-emerald-600 text-white' : 'bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-200'
+                      }">
+                        ${done ? '✓' : '○'}
+                      </button>
+                      <button onclick="toggleBookmark('${id}', 'Adab #${ad.no}')" class="px-2 py-1 rounded-lg text-[11px] font-bold cursor-pointer ${
+                        fav ? 'bg-amber-400 text-emerald-950' : 'bg-white dark:bg-slate-700 text-slate-400'
+                      }">
+                        ★
+                      </button>
+                    </div>
+                  </summary>
+                  <ul class="p-4 pt-3 space-y-1 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-white dark:bg-slate-900/70">
+                    ${ad.butir.map((b) => `<li>${escapeHtml(b)}</li>`).join('')}
+                  </ul>
+                </details>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderKemandirian() {
+      const container = document.getElementById('kemandirianContainer');
+      container.innerHTML = `
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-emerald-200/70 dark:border-slate-800 shadow-soft p-5 sm:p-6 space-y-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-amber-400">Silabus Rinci • Poin 7</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
+            Pembiasaan Kemandirian (Pribadi, Keluarga &amp; Jamaah/Sekolah)
+          </h2>
+          <div class="grid lg:grid-cols-3 gap-4">
+            ${CURRICULUM_DATA.kemandirian.map((km) => `
+              <div class="rounded-2xl border border-emerald-200/80 dark:border-slate-800 bg-emerald-50/50 dark:bg-slate-800/60 p-4 space-y-2.5">
+                <div class="flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-xl bg-emerald-800 text-amber-300 font-extrabold text-xs flex items-center justify-center">${km.kode}</span>
+                  <h3 class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">${escapeHtml(km.judul)}</h3>
+                </div>
+                <ul class="space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                  ${km.butir.map((b, idx) => {
+                    const id = makeItemId('kemandirian', `${km.kode}-${idx}`);
+                    const done = isCompleted(id);
+                    return `
+                      <li class="flex items-start justify-between gap-2 p-2 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200/60 dark:border-slate-700/60">
+                        <span>${escapeHtml(b)}</span>
+                        <button onclick="toggleCompleted('${id}', '${escapeJs(b)}')" class="px-2 py-0.5 rounded text-[11px] font-bold shrink-0 cursor-pointer ${
+                          done ? 'bg-emerald-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
+                        }">${done ? '✓' : '○'}</button>
+                      </li>
+                    `;
+                  }).join('')}
+                </ul>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-emerald-900 to-teal-900 text-white rounded-2xl p-5 sm:p-6 shadow-lg border border-amber-400/30 space-y-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-300">Catatan Pelaksanaan Kelas Bawah</span>
+          <p class="text-xs sm:text-sm text-emerald-50 leading-relaxed">
+            ${escapeHtml(CURRICULUM_DATA.catatanPelaksanaan)}
+          </p>
+        </div>
+      `;
+    }
+
+    function renderProgresTab() {
+      const statsEl = document.getElementById('progresStats');
+      const listEl = document.getElementById('bookmarkedItemsList');
+
+      const totalTargets =
+        CURRICULUM_DATA.asmaul.length +
+        CURRICULUM_DATA.doa.length +
+        CURRICULUM_DATA.dalil.reduce((acc, g) => acc + g.items.length, 0) +
+        CURRICULUM_DATA.adab18.length +
+        CURRICULUM_DATA.matriks.length;
+
+      const doneCount = appState.completed.length;
+      const favCount = appState.bookmarks.length;
+      const pct = totalTargets > 0 ? Math.min(100, Math.round((doneCount / totalTargets) * 100)) : 0;
+
+      statsEl.innerHTML = `
+        <div class="p-4 rounded-2xl bg-emerald-50 dark:bg-slate-800 border border-emerald-200 dark:border-slate-700">
+          <div class="text-2xl font-extrabold text-emerald-700 dark:text-amber-300">${doneCount}</div>
+          <div class="text-xs text-slate-600 dark:text-slate-300">Item Ditandai Tuntas</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-amber-50 dark:bg-slate-800 border border-amber-200 dark:border-slate-700">
+          <div class="text-2xl font-extrabold text-amber-600 dark:text-amber-400">${favCount}</div>
+          <div class="text-xs text-slate-600 dark:text-slate-300">Item Bookmark</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-teal-50 dark:bg-slate-800 border border-teal-200 dark:border-slate-700">
+          <div class="text-2xl font-extrabold text-teal-700 dark:text-emerald-300">${pct}%</div>
+          <div class="text-xs text-slate-600 dark:text-slate-300">Persentase Capaian</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+          <div class="text-2xl font-extrabold text-slate-800 dark:text-white">${totalTargets}</div>
+          <div class="text-xs text-slate-600 dark:text-slate-300">Total Poin Terukur</div>
+        </div>
+      `;
+
+      if (favCount === 0 && doneCount === 0) {
+        listEl.innerHTML = `<p class="text-sm text-slate-500 dark:text-slate-400 py-6 text-center">Belum ada item yang di-bookmark atau ditandai tuntas. Gunakan tombol ★ atau ✓ di berbagai materi.</p>`;
+        return;
+      }
+
+      const allSavedIds = Array.from(new Set([...appState.bookmarks, ...appState.completed]));
+      listEl.innerHTML = allSavedIds.map((id) => {
+        const isFav = isBookmarked(id);
+        const isDone = isCompleted(id);
+        return `
+          <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">${escapeHtml(formatItemIdLabel(id))}</div>
+              <div class="flex gap-1.5 mt-1">
+                ${isDone ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-600 text-white">Tuntas</span>' : ''}
+                ${isFav ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-400 text-emerald-950">Bookmark</span>' : ''}
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button onclick="toggleCompleted('${id}')" class="px-2.5 py-1 rounded-xl text-xs font-bold bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-200 cursor-pointer">
+                ${isDone ? 'Batal Tuntas' : 'Tuntas'}
+              </button>
+              <button onclick="toggleBookmark('${id}')" class="px-2.5 py-1 rounded-xl text-xs font-bold bg-amber-100 dark:bg-amber-900/50 text-amber-900 dark:text-amber-200 cursor-pointer">
+                ${isFav ? 'Hapus ★' : '★'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function formatItemIdLabel(id) {
+      const [type, key] = id.split('::');
+      if (type === 'asmaul') {
+        const found = CURRICULUM_DATA.asmaul.find((x) => String(x.n) === key);
+        return found ? `Asmaul Husna #${found.n}: ${found.tr}` : id;
+      }
+      if (type === 'doa') {
+        const found = CURRICULUM_DATA.doa.find((x) => String(x.n) === key);
+        return found ? `Do'a #${found.n}: ${found.judul}` : id;
+      }
+      if (type === 'dalil') {
+        return `Dalil ${key}`;
+      }
+      if (type === 'adab18') {
+        const found = CURRICULUM_DATA.adab18.find((x) => String(x.no) === key);
+        return found ? `Adab #${found.no}: ${found.judul}` : id;
+      }
+      if (type === 'matriks') {
+        const found = CURRICULUM_DATA.matriks.find((x) => String(x.no) === key);
+        return found ? `Matriks #${found.no}: ${found.bidang}` : id;
+      }
+      return id;
+    }
+
+    function exportProgressJSON() {
+      const summaryText =
+        `Rekap Progres Cabe Rawit PPG Garut Selatan\n` +
+        `Tuntas: ${appState.completed.length} item | Bookmark: ${appState.bookmarks.length} item\n` +
+        `Daftar Tuntas: ${appState.completed.map(formatItemIdLabel).join(', ') || '-'}`;
+
+      const tempInput = document.createElement('textarea');
+      tempInput.value = summaryText;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        showToast('Rekap progres berhasil disalin ke clipboard!', 'success');
+      } catch (e) {
+        showToast('Gagal menyalin otomatis.', 'warn');
+      }
+      tempInput.remove();
+    }
+
+    function resetProgressWithConfirm() {
+      openConfirmDialog(
+        'Reset Semua Progres & Bookmark?',
+        'Seluruh tanda tuntas dan item tersimpan di HP/perangkat ini akan dihapus.',
+        () => {
+          appState.bookmarks = [];
+          appState.completed = [];
+          saveState();
+          renderAllDynamicViews();
+          renderProgresTab();
+          showToast('Progres berhasil direset.', 'info');
+        }
+      );
+    }
+
+    // =========================================================================
+    // 8. UTILITY & INITIALIZATION
+    // =========================================================================
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function escapeJs(str) {
+      if (!str) return '';
+      return String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, ' ');
+    }
+
+    function formatBoldPrefix(line) {
+      const escaped = escapeHtml(line);
+      const colonIdx = escaped.indexOf(':');
+      if (colonIdx > 0 && colonIdx < 55) {
+        return `<strong>${escaped.slice(0, colonIdx + 1)}</strong>${escaped.slice(colonIdx + 1)}`;
+      }
+      return escaped;
+    }
+
+    function renderAllDynamicViews() {
+      renderMatriks();
+      renderAsmaul();
+      renderDoa();
+      renderSuratKelompok();
+      renderDalil();
+      renderKeilmuanPanels();
+      renderKemandirian();
+      updateProgresBadge();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadState();
+      setupPWA();
+      renderAllDynamicViews();
+      switchTab(appState.activeTab || 'beranda');
+    });
+  </script>
+</body>
+</html>
